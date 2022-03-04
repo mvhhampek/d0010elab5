@@ -1,5 +1,5 @@
 package lab5.general;
-
+//hejhej
 public abstract class Event {
 	
 	//EventQueue eventQueue;
