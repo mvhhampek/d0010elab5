@@ -2,23 +2,26 @@ package lab5.store.time;
 
 import java.util.Random;
 
-public class UniformRandomStream{
-    
-    private Random random;
-    private double intervall;
-    private double min;
 
-    public UniformRandomStream(double min, double max, long seed){
-        random = new Random(seed);
-        this.min = min;
-        intervall = max - min;
-    }    
+public class UniformRandomStream {
 
-    /**
-     * Returns random double within min and max
-     */
-    public double next(){
-        return intervall * random.nextDouble() + min;
-    }
-
+	private Random rand;
+	private double lower, width;
+	
+	public UniformRandomStream(double lower, double upper, long seed) {
+		rand = new Random(seed);
+		this.lower = lower;
+		this.width = upper-lower;
+	}
+	
+	public UniformRandomStream(double lower, double upper) {
+		rand = new Random();
+	    this.lower = lower;
+	    this.width = upper-lower;
+	}
+	
+	public double next() {
+	    return lower+rand.nextDouble()*width;
+	}
 }
+
