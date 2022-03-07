@@ -2,15 +2,21 @@ package lab5.store;
 
 import lab5.general.Event;
 
+
 public class ArrivalEvent extends Event  {
 	private Customer customer;
 
+
+	// skapar ett nytt pick event och arrivalevent
 	void execute() {
+
 		if(StoreState.isOpen() && StoreState.Space()){
-			//ny kund
+			PickEvent pick = new PickEvent()
+			ArrivalEvent arrive = new ArrivalEvent()
 		}
 		if(StoreState.isOpen() && !StoreState.Space()){
-			//missar kund
+			//missar kund och skapar nytt arrivalevent
+			// new.missar.kund.event?? sug en hårig, fittnylle!
 		}
 		if(!StoreState.isOpen){
 			//inte missad kund
@@ -26,5 +32,5 @@ public class ArrivalEvent extends Event  {
 	Customer getCustomer(){
 		return customer;
 	}
-	
+
 }
