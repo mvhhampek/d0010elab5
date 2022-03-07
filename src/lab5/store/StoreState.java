@@ -57,6 +57,24 @@ public class StoreState extends State  {
     }
 
 
+    /**
+     * Checks if someone is in Line waiting to pay.
+     * @return true if a customer is in line
+     * @return false if there is no line
+     */
+    public boolean CustomerInLine(){
+        if(customerQueue.size() == 0){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+    public boolean FreeCheckout(){
+        //kolla om det finns en ledig snabbkasssa
+    }
+
+
     
 }
 
