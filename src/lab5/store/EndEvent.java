@@ -3,14 +3,15 @@ package lab5.store;
 import lab5.general.Event;
 
 public class EndEvent extends Event  {
+	private StoreState storeState;
 
 	public void execute() {
-
+		storeState.EndSimulation();
 	}
 
 	public double getTime() {
 
-		return 0;
+		return 999;
 	}
 
 	public Customer getCustomer(){

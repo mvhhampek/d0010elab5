@@ -1,10 +1,17 @@
 package lab5.store;
 
+import lab5.general.Simulator;
 import lab5.general.State;
 import java.lang.reflect.Array;
 
 public class StoreState extends State {
-    public static CustomerFactory customerFactory;
+    public StoreState(Simulator s) {
+        super(s);
+        //TODO Auto-generated constructor stub
+    }
+
+    private boolean simulationRunning;
+    public CustomerFactory customerFactory;
     public CustomerQueue customerQueue;
     private Array customers;
     private boolean open;
@@ -23,10 +30,27 @@ public class StoreState extends State {
     private double maxPickTime;
     private int lambda; // customers per timme
 
+
     /**
-     * checks if the store is open/closed.
+     * Checks if the simulation is running.
+     *
+     * @return returns a boolean, true if simulation is running and false if the simulation has ended.
+     */
+    public boolean SimulationIsRunning(){
+        return simulationRunning;
+    }
+
+    /**
+     * Ends the Simulation.
+     */
+    public void EndSimulation(){
+    simulationRunning = false;
+    }
+
+    /**
+     * Checks if the store is open/closed.
      * 
-     * @return returns a bolian depending if the store is open or not
+     * @return returns a boolean, true if the store is opened and false if the store is closed.
      */
     public boolean isOpen() {
         return open;
