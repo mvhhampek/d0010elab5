@@ -12,7 +12,7 @@ public class PickEvent extends Event {
 	private StoreState storeState;
 	private CustomerQueue customerQueue;
 
-	public PickEvent(State state, EventQueue eventQueue, double time) {
+	public PickEvent(State state, EventQueue eventQueue, double time, Customer Inheritance) {
 		this.state = state;
 		this.eventQueue = eventQueue;
 		this.time = time;
