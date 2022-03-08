@@ -1,12 +1,12 @@
 package lab5.general;
-
+import lab5.store.Customer;
 public abstract class Event {
 	
 	EventQueue eventQueue;
 	State state;
 
-	abstract void execute();
-	abstract double getTime();
-	abstract Customer getCustomer();
+	public abstract void execute();
+	public abstract double getTime();
+	public abstract Customer getCustomer();
 
 }

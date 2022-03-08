@@ -12,7 +12,7 @@ public class StoreState extends State  {
     private int customersInStore;
     private int checkouts;
 
-    private int missedCostumers ////<-------
+    private int missedCostumers; ////<-------
 
     private double openTime;
     private double currentTime;
@@ -38,10 +38,21 @@ public class StoreState extends State  {
         open=false;
     }
     
+    /**
+     * 
+     * @return true if there is place for more customers in the store
+     */
     public boolean space(){
-    	// kollar om det finn utrymme i affären
+        return customersInStore < maxCustomers;
     }
     
+    /**
+     * Increased missedCustomers by 1
+     */
+    public void missedCustomer(){
+        missedCostumers++;
+    }
+
     /**
      * send the current time
      * @return the current time
