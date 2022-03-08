@@ -11,6 +11,7 @@ public class StoreState extends State  {
     private int maxCustomers;
     private int customersInStore;
     private int checkouts;
+    private int occupiedCheckouts;
 
     private int missedCostumers; ////<-------
 
@@ -23,6 +24,7 @@ public class StoreState extends State  {
     private double maxPickTime;
     private int lambda; // customers per timme 
     
+
     /**
      * checks if the store is open/closed.
      * @return returns a bolian depending if the store is open or not
