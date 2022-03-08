@@ -23,14 +23,12 @@ public class PickEvent extends Event {
 
 	public void execute() {
 		if (storeState.freeCheckouts() > 0) {
-			eventQueue.push(new PayEvent(state, eventQueue, time, customer));
 			storeState.changeOccupiedCheckouts(1);
+			eventQueue.push(new PayEvent(state, eventQueue, time, customer));
+			
 			
 		} else {
-			// ställ i kön och sedan nytt pay event?
-			
-			// ställ(the kund).in.theKö();
-			eventQueue.push(new PayEvent(state, eventQueue, time));
+			customerQueue.add(customer);
 		}
 
 	}
