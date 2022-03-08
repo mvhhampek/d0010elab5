@@ -12,7 +12,8 @@ public class PayEvent extends Event  {
 	private double time;
 	private StoreState storeState;
 
-	public PayEvent(State state, EventQueue eventQueue, double time){
+	public PayEvent(State state, EventQueue eventQueue, double time, Customer customer){
+		this.customer = customer
 		this.state = state;
 		this.eventQueue = eventQueue;
 		this.time = time;

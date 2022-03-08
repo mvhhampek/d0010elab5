@@ -12,17 +12,18 @@ public class PickEvent extends Event {
 	private StoreState storeState;
 	private CustomerQueue customerQueue;
 
-	public PickEvent(State state, EventQueue eventQueue, double time) {
+	public PickEvent(State state, EventQueue eventQueue, double time Customer customer) {
 		this.state = state;
 		this.eventQueue = eventQueue;
 		this.time = time;
+		this.customer = customer;
 		storeState = state.getStore();
 		customerQueue = storeState.getCustomerQueue();
 	}
 
 	public void execute() {
 		if (storeState.freeCheckouts() > 0) {
-			eventQueue.push(new PayEvent(state, eventQueue, time));
+			eventQueue.push(new PayEvent(state, eventQueue, time, customer));
 			storeState.changeOccupiedCheckouts(1);
 			
 		} else {
