@@ -23,7 +23,7 @@ public class ArrivalEvent extends Event  {
 
 	public void execute() {
 		if(storeState.isOpen() && storeState.space()){
-			eventQueue.push(new PickEvent());
+			eventQueue.push(new PickEvent(state, eventQueue, time));
 			eventQueue.push(new ArrivalEvent(state, eventQueue, time));
 		}
 		if(storeState.isOpen() && !storeState.space()){

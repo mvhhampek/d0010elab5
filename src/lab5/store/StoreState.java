@@ -72,5 +72,13 @@ public class StoreState extends State  {
     public CustomerQueue getCustomerQueue(){
         return customerQueue;
     }
+
+    /**
+     * Returns amount of unoccupied checkouts
+     * @return amount of unoccupied checkouts
+     */
+    public int freeCheckouts(){
+        return checkouts - occupiedCheckouts;
+    }
 }
 
