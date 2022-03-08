@@ -4,16 +4,16 @@ import lab5.general.Event;
 
 public class StartEvent extends Event {
 
-	void execute() {
+	public void execute() {
 		
 	}
 
-	double getTime() {
+	public double getTime() {
 
 		return 0;
 	}
 
-	Customer getCustomer(){
+	public Customer getCustomer(){
 		return null;
 	}
 }

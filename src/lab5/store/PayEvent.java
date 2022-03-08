@@ -19,16 +19,16 @@ public class PayEvent extends Event  {
 		storeState = state.getStore();
 	}
 
-	void execute() {
+	public void execute() {
 
 	}
 
-	double getTime() {
+	public double getTime() {
 
 		return 0;
 	}
 
-	Customer getCustomer(){
+	public Customer getCustomer(){
 		return customer;
 	}
 }
