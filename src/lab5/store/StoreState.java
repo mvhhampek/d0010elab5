@@ -10,6 +10,7 @@ public class StoreState extends State {
         //TODO Auto-generated constructor stub
     }
 
+    private boolean simulationRunning;
     public CustomerFactory customerFactory;
     public CustomerQueue customerQueue;
     private Array customers;
@@ -28,6 +29,16 @@ public class StoreState extends State {
     private double minPickTime;
     private double maxPickTime;
     private int lambda; // customers per timme
+
+
+
+    public boolean SimulationIsRunning(){
+        return simulationRunning;
+    }
+
+    public void EndSimulation(){
+    simulationRunning = false;
+    }
 
     /**
      * checks if the store is open/closed.
