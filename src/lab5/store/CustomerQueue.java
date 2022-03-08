@@ -2,50 +2,61 @@ package lab5.store;
 
 import java.util.NoSuchElementException;
 
-import java.util.ArrayList;
-
 public class CustomerQueue {
+	
+	private Object[] queue;
+	private int mSize;
 
-	private ArrayList<Object> queue;
-	private int maxSize = 0;
+	public CustomerQueue() {
+		queue = new Object[0];
+		mSize = 0;
+	}
 
-    public CustomerQueue(){
-	    queue = new ArrayList<Object>();
-    }
-	public void add(Object arg0) {
-		queue.add(arg0);
-		if (queue.size() < maxSize) {
-			maxSize = queue.size();
+	public void add(Object item) {
+		if (mSize == this.size()) {
+			mSize++;
 		}
+		int n = this.size();
+		Object[] temp = new Object[n + 1];
+		for (int i = 0; i < n; i++) {
+			temp[i] = queue[i];
+		}
+		temp[n] = item;
+		queue = temp;
 	}
 
 	public Object first() throws NoSuchElementException {
-		if (queue.size() == 0) {
+		if (isEmpty()) {
 			throw new NoSuchElementException();
+		} else {
+			return queue[0];
 		}
-		return queue.get(0);
 	}
-
 
 	public boolean isEmpty() {
 		return size() == 0;
 	}
 
 	public int maxSize() {
-		return maxSize;
+		return mSize;
 	}
 
 	public void removeFirst() throws NoSuchElementException {
-
-		if (queue.isEmpty()) {
+		if (isEmpty()) {
 			throw new NoSuchElementException();
+		} else {
+			int n = this.size();
+			Object[] temp = new Object[n - 1];
+			for (int i = 1; i < n; i++) {
+				// Skippar första elementet i queue
+				temp[i - 1] = queue[i];
+			}
+			queue = temp;
 		}
-		queue.remove(0);
-
 	}
 
 	public int size() {
-		return queue.size();
+		return queue.length;
 	}
 
 
