@@ -80,5 +80,9 @@ public class StoreState extends State  {
     public int freeCheckouts(){
         return checkouts - occupiedCheckouts;
     }
+
+    public void changeOccupiedCheckouts(int value){
+        occupiedCheckouts += value;
+    }
 }
 
