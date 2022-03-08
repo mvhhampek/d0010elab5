@@ -22,8 +22,11 @@ public class PayEvent extends Event  {
 	}
 
 	public void execute() {
-		if(storeState.getCustomerQueue() != null){
+		if(!queue.isEmpty()){
 			eventQueue.push(new PayEvent(state, eventQueue, time, (Customer) queue.first()));
+		}
+		else{
+			storeState.changeOccupiedCheckouts(-1);
 		}
 
 
