@@ -31,19 +31,26 @@ public class StoreState extends State {
     private int lambda; // customers per timme
 
 
-
+    /**
+     * Checks if the simulation is running.
+     *
+     * @return returns a boolean, true if simulation is running and false if the simulation has ended.
+     */
     public boolean SimulationIsRunning(){
         return simulationRunning;
     }
 
+    /**
+     * Ends the Simulation.
+     */
     public void EndSimulation(){
     simulationRunning = false;
     }
 
     /**
-     * checks if the store is open/closed.
+     * Checks if the store is open/closed.
      * 
-     * @return returns a bolian depending if the store is open or not
+     * @return returns a boolean, true if the store is opened and false if the store is closed.
      */
     public boolean isOpen() {
         return open;
