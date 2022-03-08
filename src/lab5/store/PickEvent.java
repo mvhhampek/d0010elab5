@@ -12,7 +12,7 @@ public class PickEvent extends Event {
 	private StoreState storeState;
 	private CustomerQueue customerQueue;
 
-	public PickEvent(State state, EventQueue eventQueue, double time, Customer Inheritance) {
+	public PickEvent(State state, EventQueue eventQueue, double time) {
 		this.state = state;
 		this.eventQueue = eventQueue;
 		this.time = time;
@@ -23,6 +23,8 @@ public class PickEvent extends Event {
 	public void execute() {
 		if (storeState.freeCheckouts() > 0) {
 			eventQueue.push(new PayEvent(state, eventQueue, time));
+			
+			
 		} else {
 			// ställ i kön och sedan nytt pay event?
 
