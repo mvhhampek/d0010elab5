@@ -11,9 +11,10 @@ public class PayEvent extends Event  {
 	private EventQueue eventQueue;
 	private double time;
 	private StoreState storeState;
+	private CustomerQueue queue;
 
 	public PayEvent(State state, EventQueue eventQueue, double time, Customer customer){
-		this.customer = customer
+		this.customer = customer;
 		this.state = state;
 		this.eventQueue = eventQueue;
 		this.time = time;
@@ -21,12 +22,8 @@ public class PayEvent extends Event  {
 	}
 
 	public void execute() {
-
-		if(StoreState. || !StoreState.FreeCheckout){
-		
-		}
-		else{
-		
+		if(storeState.getCustomerQueue() != null){
+			eventQueue.push(new PayEvent(state, eventQueue, time, (Customer) queue.first()));
 		}
 
 
