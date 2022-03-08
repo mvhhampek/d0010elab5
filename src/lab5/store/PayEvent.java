@@ -21,6 +21,15 @@ public class PayEvent extends Event  {
 
 	public void execute() {
 
+		if(StoreState.CustomerInLine || !StoreState.FreeCheckout){
+			CustomerQueue(customer);
+			//Om det redan finnns en i kön eller ingen ledig kassa ställer sig kunden i kön
+		}
+		else{
+			PayEvent pay = new PayEvent();
+		}
+
+
 	}
 
 	public double getTime() {
