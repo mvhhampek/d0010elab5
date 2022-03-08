@@ -37,7 +37,6 @@ public class ArrivalEvent extends Event  {
 	}
 
 	public double getTime() {
-
 		return time;
 	}
 
