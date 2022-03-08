@@ -4,7 +4,8 @@ import lab5.general.State;
 import java.lang.reflect.Array;
 
 public class StoreState extends State {
-    private CustomerQueue customerQueue;
+    public static CustomerFactory customerFactory;
+    public CustomerQueue customerQueue;
     private Array customers;
     private boolean open;
     private int maxCustomers;
