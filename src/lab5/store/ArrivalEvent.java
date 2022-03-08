@@ -16,7 +16,7 @@ public class ArrivalEvent extends Event  {
 		}
 		if(StoreState.isOpen() && !StoreState.Space()){
 			ArrivalEvent arrive = new ArrivalEvent()
-			Missadkund = Missadkund + 1;
+			//Missadkund = Missadkund + 1;
 			// new.missar.kund.event?? sug en hårig, fittnylle!
 		}
 		if(!StoreState.isOpen){
