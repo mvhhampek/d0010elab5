@@ -6,9 +6,12 @@ import java.util.ArrayList;
 
 public class CustomerQueue {
 
-	private ArrayList<Object> queue = new ArrayList<Object>();
+	private ArrayList<Object> queue;
 	private int maxSize = 0;
 
+    public CustomerQueue(){
+	    queue = new ArrayList<Object>();
+    }
 	public void add(Object arg0) {
 		queue.add(arg0);
 		if (queue.size() < maxSize) {
@@ -25,12 +28,7 @@ public class CustomerQueue {
 
 
 	public boolean isEmpty() {
-		if(this.size() == 0){
-			return true;
-		}
-		else{
-			return false;
-		}
+		return size() == 0;
 	}
 
 	public int maxSize() {
@@ -45,7 +43,6 @@ public class CustomerQueue {
 		queue.remove(0);
 
 	}
-
 
 	public int size() {
 		return queue.size();

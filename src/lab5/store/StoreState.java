@@ -1,7 +1,6 @@
 package lab5.store;
 
 import lab5.general.State;
-
 import java.lang.reflect.Array;
 
 public class StoreState extends State  {   
@@ -12,8 +11,7 @@ public class StoreState extends State  {
     private int customersInStore;
     private int checkouts;
     private int occupiedCheckouts;
-
-    private int missedCostumers; ////<-------
+    private int missedCostumers;
 
     private double openTime;
     private double currentTime;
@@ -32,14 +30,14 @@ public class StoreState extends State  {
     public boolean isOpen(){
         return open;
     }
-    
+
     /**
      * Closes the store.
      */
     public void close(){
         open=false;
     }
-    
+
     /**
      * 
      * @return true if there is place for more customers in the store
@@ -47,7 +45,7 @@ public class StoreState extends State  {
     public boolean space(){
         return customersInStore < maxCustomers;
     }
-    
+
     /**
      * Increased missedCustomers by 1
      */
@@ -69,11 +67,10 @@ public class StoreState extends State  {
      */
     public void updateTime(double timeElapsed) {
     	currentTime+=timeElapsed;
-    }
+    }    
 
     public CustomerQueue getCustomerQueue(){
         return customerQueue;
     }
-    
 }
 
