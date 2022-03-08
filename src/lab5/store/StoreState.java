@@ -85,4 +85,3 @@ public class StoreState extends State  {
         occupiedCheckouts += value;
     }
 }
-
