@@ -12,6 +12,8 @@ public class EventQueue {
 
     /**
      * Adds event to queue in correct location
+     * 
+     * @param e Event to add
      */
     public void push(Event e){
         int n = size();
@@ -25,7 +27,7 @@ public class EventQueue {
     }
 
     /**
-     * Sorts queue in ascending order  
+     * Sorts queue in ascending order (Bubble sort)
      */
     private void sort(){
         for (int i = 0; i < size(); i++) {
@@ -54,8 +56,10 @@ public class EventQueue {
         return e;
     }
 
+    /**
+     * Returns size of EventQueue
+     */
     public int size(){
         return queue.length;
     }
-
 }
