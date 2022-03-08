@@ -1,0 +1,832 @@
+Index: src/lab5/store/time/UniformRandomStream.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package lab5.store.time;\r\n\r\nimport java.util.Random;\r\n\r\n\r\npublic class UniformRandomStream {\r\n\r\n\tprivate Random rand;\r\n\tprivate double lower, width;\r\n\t\r\n\r\n\tpublic UniformRandomStream(double lower, double upper, long seed) {\r\n\t\trand = new Random(seed);\r\n\t\tthis.lower = lower;\r\n\t\tthis.width = upper-lower;\r\n\t}\r\n\t\r\n\t\r\n\tpublic UniformRandomStream(double lower, double upper) {\r\n\t\trand = new Random();\r\n\t    this.lower = lower;\r\n\t    this.width = upper-lower;\r\n\t}\r\n\t\r\n\tpublic double next() {\r\n\t    return lower+rand.nextDouble()*width;\r\n\t}\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/lab5/store/time/UniformRandomStream.java b/src/lab5/store/time/UniformRandomStream.java
+--- a/src/lab5/store/time/UniformRandomStream.java	
++++ b/src/lab5/store/time/UniformRandomStream.java	
+@@ -8,14 +8,12 @@
+ 	private Random rand;
+ 	private double lower, width;
+ 	
+-
+ 	public UniformRandomStream(double lower, double upper, long seed) {
+ 		rand = new Random(seed);
+ 		this.lower = lower;
+ 		this.width = upper-lower;
+ 	}
+ 	
+-	
+ 	public UniformRandomStream(double lower, double upper) {
+ 		rand = new Random();
+ 	    this.lower = lower;
+Index: src/lab5/store/ArrivalEvent.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package lab5.store;\r\n\r\nimport lab5.general.State;\r\nimport lab5.general.Event;\r\nimport lab5.general.EventQueue;\r\n\r\n\r\npublic class ArrivalEvent extends Event  {\r\n\tprivate Customer customer;\r\n\tprivate State state;\r\n\tprivate EventQueue eventQueue;\r\n\tprivate double time;\r\n\tprivate StoreState storeState;\r\n\t\r\n\t// skapar ett nytt pick event och arrivalevent\r\n\r\n\tpublic ArrivalEvent(State state, EventQueue eventQueue, double time){\r\n\t\tthis.state = state;\r\n\t\tthis.eventQueue = eventQueue;\r\n\t\tthis.time = time;\r\n\t\tstoreState = state.getStore();\r\n\t}\r\n\r\n\tpublic void execute() {\r\n\t\tif(storeState.isOpen() && storeState.space()){\r\n\t\t\teventQueue.push(new PickEvent(state, eventQueue, time));\r\n\t\t\teventQueue.push(new ArrivalEvent(state, eventQueue, time));\r\n\t\t}\r\n\t\tif(storeState.isOpen() && !storeState.space()){\r\n\t\t\tstoreState.missedCustomer();\r\n\t\t\teventQueue.push(new ArrivalEvent(state, eventQueue, time));\r\n\t\t}\r\n\t\tif(!storeState.isOpen()){\r\n\t\t\t//inte missad kund\r\n\t\t}\r\n\t}\r\n\r\n\tpublic double getTime() {\r\n\t\treturn time;\r\n\t}\r\n\r\n\tpublic Customer getCustomer(){\r\n\t\treturn customer;\r\n\t}\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/lab5/store/ArrivalEvent.java b/src/lab5/store/ArrivalEvent.java
+--- a/src/lab5/store/ArrivalEvent.java	
++++ b/src/lab5/store/ArrivalEvent.java	
+@@ -1,45 +1,36 @@
+ package lab5.store;
+ 
+-import lab5.general.State;
+ import lab5.general.Event;
+-import lab5.general.EventQueue;
+ 
+ 
+ public class ArrivalEvent extends Event  {
+ 	private Customer customer;
+-	private State state;
+-	private EventQueue eventQueue;
+-	private double time;
+-	private StoreState storeState;
+-	
++
++
+ 	// skapar ett nytt pick event och arrivalevent
+-
+-	public ArrivalEvent(State state, EventQueue eventQueue, double time){
+-		this.state = state;
+-		this.eventQueue = eventQueue;
+-		this.time = time;
+-		storeState = state.getStore();
+-	}
++	void execute() {
+ 
+-	public void execute() {
+-		if(storeState.isOpen() && storeState.space()){
+-			eventQueue.push(new PickEvent(state, eventQueue, time));
+-			eventQueue.push(new ArrivalEvent(state, eventQueue, time));
++		if(StoreState.isOpen() && StoreState.Space()){
++			PickEvent pick = new PickEvent()
++			ArrivalEvent arrive = new ArrivalEvent()
+ 		}
+-		if(storeState.isOpen() && !storeState.space()){
+-			storeState.missedCustomer();
+-			eventQueue.push(new ArrivalEvent(state, eventQueue, time));
++		if(StoreState.isOpen() && !StoreState.Space()){
++			//missar kund och skapar nytt arrivalevent
++			// new.missar.kund.event?? sug en hårig, fittnylle!
+ 		}
+-		if(!storeState.isOpen()){
++		if(!StoreState.isOpen){
+ 			//inte missad kund
+ 		}
++
+ 	}
+ 
+-	public double getTime() {
+-		return time;
++	double getTime() {
++
++		return 0;
+ 	}
+ 
+-	public Customer getCustomer(){
++	Customer getCustomer(){
+ 		return customer;
+ 	}
++
+ }
+Index: src/lab5/store/PayEvent.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package lab5.store;\r\n\r\nimport lab5.general.State;\r\nimport lab5.general.Event;\r\nimport lab5.general.EventQueue;\r\n\r\n\r\npublic class PayEvent extends Event  {\r\n\tprivate Customer customer;\r\n\tprivate State state;\r\n\tprivate EventQueue eventQueue;\r\n\tprivate double time;\r\n\tprivate StoreState storeState;\r\n\r\n\tpublic PayEvent(State state, EventQueue eventQueue, double time){\r\n\t\tthis.state = state;\r\n\t\tthis.eventQueue = eventQueue;\r\n\t\tthis.time = time;\r\n\t\tstoreState = state.getStore();\r\n\t}\r\n\r\n\tpublic void execute() {\r\n\r\n\t\tif(StoreState.CustomerInLine || !StoreState.FreeCheckout){\r\n\t\t\tCustomerQueue(customer);\r\n\t\t\t//Om det redan finnns en i kön eller ingen ledig kassa ställer sig kunden i kön\r\n\t\t}\r\n\t\telse{\r\n\t\t\tPayEvent pay = new PayEvent();\r\n\t\t}\r\n\r\n\r\n\t}\r\n\r\n\tpublic double getTime() {\r\n\r\n\t\treturn 0;\r\n\t}\r\n\r\n\tpublic Customer getCustomer(){\r\n\t\treturn customer;\r\n\t}\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/lab5/store/PayEvent.java b/src/lab5/store/PayEvent.java
+--- a/src/lab5/store/PayEvent.java	
++++ b/src/lab5/store/PayEvent.java	
+@@ -1,25 +1,11 @@
+ package lab5.store;
+ 
+-import lab5.general.State;
+ import lab5.general.Event;
+-import lab5.general.EventQueue;
+-
+ 
+ public class PayEvent extends Event  {
+ 	private Customer customer;
+-	private State state;
+-	private EventQueue eventQueue;
+-	private double time;
+-	private StoreState storeState;
+ 
+-	public PayEvent(State state, EventQueue eventQueue, double time){
+-		this.state = state;
+-		this.eventQueue = eventQueue;
+-		this.time = time;
+-		storeState = state.getStore();
+-	}
+-
+-	public void execute() {
++	void execute() {
+ 
+ 		if(StoreState.CustomerInLine || !StoreState.FreeCheckout){
+ 			CustomerQueue(customer);
+@@ -32,12 +18,12 @@
+ 
+ 	}
+ 
+-	public double getTime() {
++	double getTime() {
+ 
+ 		return 0;
+ 	}
+ 
+-	public Customer getCustomer(){
++	Customer getCustomer(){
+ 		return customer;
+ 	}
+ }
+Index: src/lab5/store/StartEvent.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package lab5.store;\r\n\r\nimport lab5.general.Event;\r\n\r\npublic class StartEvent extends Event {\r\n\r\n\tpublic void execute() {\r\n\t\t\r\n\t}\r\n\r\n\tpublic double getTime() {\r\n\r\n\t\treturn 0;\r\n\t}\r\n\r\n\tpublic Customer getCustomer(){\r\n\t\treturn null;\r\n\t}\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/lab5/store/StartEvent.java b/src/lab5/store/StartEvent.java
+--- a/src/lab5/store/StartEvent.java	
++++ b/src/lab5/store/StartEvent.java	
+@@ -4,16 +4,16 @@
+ 
+ public class StartEvent extends Event {
+ 
+-	public void execute() {
++	void execute() {
+ 		
+ 	}
+ 
+-	public double getTime() {
++	double getTime() {
+ 
+ 		return 0;
+ 	}
+ 
+-	public Customer getCustomer(){
++	Customer getCustomer(){
+ 		return null;
+ 	}
+ }
+\ No newline at end of file
+Index: src/lab5/store/CustomerQueue.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package lab5.store;\r\n\r\nimport java.util.NoSuchElementException;\r\n\r\npublic class CustomerQueue {\r\n\t\r\n\tprivate Object[] queue;\r\n\tprivate int mSize;\r\n\r\n\tpublic CustomerQueue() {\r\n\t\tqueue = new Object[0];\r\n\t\tmSize = 0;\r\n\t}\r\n\r\n\tpublic void add(Object item) {\r\n\t\tif (mSize == this.size()) {\r\n\t\t\tmSize++;\r\n\t\t}\r\n\t\tint n = this.size();\r\n\t\tObject[] temp = new Object[n + 1];\r\n\t\tfor (int i = 0; i < n; i++) {\r\n\t\t\ttemp[i] = queue[i];\r\n\t\t}\r\n\t\ttemp[n] = item;\r\n\t\tqueue = temp;\r\n\t}\r\n\r\n\tpublic Object first() throws NoSuchElementException {\r\n\t\tif (isEmpty()) {\r\n\t\t\tthrow new NoSuchElementException();\r\n\t\t} else {\r\n\t\t\treturn queue[0];\r\n\t\t}\r\n\t}\r\n\r\n\tpublic boolean isEmpty() {\r\n\t\treturn size() == 0;\r\n\t}\r\n\r\n\tpublic int maxSize() {\r\n\t\treturn mSize;\r\n\t}\r\n\r\n\tpublic void removeFirst() throws NoSuchElementException {\r\n\t\tif (isEmpty()) {\r\n\t\t\tthrow new NoSuchElementException();\r\n\t\t} else {\r\n\t\t\tint n = this.size();\r\n\t\t\tObject[] temp = new Object[n - 1];\r\n\t\t\tfor (int i = 1; i < n; i++) {\r\n\t\t\t\t// Skippar första elementet i queue\r\n\t\t\t\ttemp[i - 1] = queue[i];\r\n\t\t\t}\r\n\t\t\tqueue = temp;\r\n\t\t}\r\n\t}\r\n\r\n\tpublic int size() {\r\n\t\treturn queue.length;\r\n\t}\r\n\r\n\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/lab5/store/CustomerQueue.java b/src/lab5/store/CustomerQueue.java
+--- a/src/lab5/store/CustomerQueue.java	
++++ b/src/lab5/store/CustomerQueue.java	
+@@ -2,63 +2,84 @@
+ 
+ import java.util.NoSuchElementException;
+ 
+-public class CustomerQueue {
+-	
+-	private Object[] queue;
+-	private int mSize;
++import java.util.ArrayList;
+ 
+-	public CustomerQueue() {
+-		queue = new Object[0];
+-		mSize = 0;
+-	}
++public class CustomerQueue implements Queue {
++	private ArrayList<Object> queue = new ArrayList<Object>();
++	private int maxSize = 0;
+ 
+-	public void add(Object item) {
+-		if (mSize == this.size()) {
+-			mSize++;
++	@Override
++	public void add(Object arg0) {
++		queue.add(arg0);
++		if (queue.size() < maxSize) {
++			maxSize = queue.size();
+ 		}
+-		int n = this.size();
+-		Object[] temp = new Object[n + 1];
+-		for (int i = 0; i < n; i++) {
+-			temp[i] = queue[i];
+-		}
+-		temp[n] = item;
+-		queue = temp;
+ 	}
+ 
++	@Override
+ 	public Object first() throws NoSuchElementException {
+-		if (isEmpty()) {
++		if (queue.size() == 0) {
+ 			throw new NoSuchElementException();
+-		} else {
+-			return queue[0];
+ 		}
++		return queue.get(0);
+ 	}
+ 
++	@Override
+ 	public boolean isEmpty() {
+-		return size() == 0;
++		return queue.isEmpty();
+ 	}
+ 
++	@Override
+ 	public int maxSize() {
+-		return mSize;
++		return maxSize;
+ 	}
+ 
++	@Override
+ 	public void removeFirst() throws NoSuchElementException {
+-		if (isEmpty()) {
++
++		if (queue.size() == 0) {
+ 			throw new NoSuchElementException();
+-		} else {
+-			int n = this.size();
+-			Object[] temp = new Object[n - 1];
+-			for (int i = 1; i < n; i++) {
+-				// Skippar första elementet i queue
+-				temp[i - 1] = queue[i];
+-			}
+-			queue = temp;
+ 		}
++		queue.remove(0);
++
+ 	}
+ 
++	@Override
+ 	public int size() {
+-		return queue.length;
++		return queue.size();
+ 	}
++
++	@Override
++	public String toString() {
++		String reString = "Queue: ";
++		for (int i = 0; i < queue.size(); i++) {
++			reString += "(" + String.valueOf(queue.get(i)) + ") ";
++		}
++		return reString;
++	}
++
++	@Override
++	public boolean equals(Object f) throws ClassCastException {
++		if (this.getClass() != f.getClass()) {
++			throw new ClassCastException();
++		}
++		if (queue.size() != ((CustomerQueue) f).queue.size()) {
++			return false;
++		}
++		for (int i = 0; i < queue.size(); i++) {
++			if (queue.get(i) == null) {
++				if (((CustomerQueue) f).queue.get(i) != null) {
++					return false;
++				}
++			} else if (((CustomerQueue) f).queue.get(i) == null) {
++				return false;
++			} else if (!queue.get(i).equals(((CustomerQueue) f).queue.get(i))) {
++				return false;
++			}
+ 
++		}
++		return true;
++	}
+ 
+ }
+ 
+Index: src/lab5/store/StoreState.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/lab5/store/StoreState.java b/src/lab5/store/StoreState.java
+--- a/src/lab5/store/StoreState.java	
++++ b/src/lab5/store/StoreState.java	
+@@ -1,0 +1,137 @@
++package lab5.store;
++
++import lab5.general.State;
++<<<<<<< HEAD
++=======
++
++>>>>>>> parent of 8d6e2f6 (Merge branch 'main' of https://github.com/mvhhampek/lab5)
++import java.lang.reflect.Array;
++
++public class StoreState extends State  {   
++    private CustomerQueue customerQueue;
++    private Array customers;
++    private boolean open;
++    private int maxCustomers;
++    private int customersInStore;
++    private int checkouts;
++<<<<<<< HEAD
++    private int occupiedCheckouts;
++    private int missedCostumers;
++
++=======
++    
++>>>>>>> parent of 8d6e2f6 (Merge branch 'main' of https://github.com/mvhhampek/lab5)
++    private double openTime;
++    private double currentTime;
++
++    private double minPayTime;
++    private double maxPayTime;
++    private double minPickTime;
++    private double maxPickTime;
++    private int lambda; // customers per timme 
++    
++<<<<<<< HEAD
++
++=======
++>>>>>>> parent of 8d6e2f6 (Merge branch 'main' of https://github.com/mvhhampek/lab5)
++    /**
++     * checks if the store is open/closed.
++     * @return returns a bolian depending if the store is open or not
++     */
++    public boolean isOpen(){
++        return open;
++    }
++<<<<<<< HEAD
++
++=======
++    
++>>>>>>> parent of 8d6e2f6 (Merge branch 'main' of https://github.com/mvhhampek/lab5)
++    /**
++     * Closes the store.
++     */
++    public void close(){
++        open=false;
++    }
++<<<<<<< HEAD
++
++    /**
++     * 
++     * @return true if there is place for more customers in the store
++     */
++    public boolean space(){
++        return customersInStore < maxCustomers;
++    }
++
++    /**
++     * Increased missedCustomers by 1
++     */
++    public void missedCustomer(){
++        missedCostumers++;
++    }
++
++=======
++    
++    public boolean space(){
++    	// kollar om det finn utrymme i affären
++    }
++    
++>>>>>>> parent of 8d6e2f6 (Merge branch 'main' of https://github.com/mvhhampek/lab5)
++    /**
++     * send the current time
++     * @return the current time
++     */
++    public double getTime() {
++    	return currentTime;
++    }
++    
++    /**
++     * Updates the time.
++     * @param timeElapsed how much time has passed
++     */
++    public void updateTime(double timeElapsed) {
++    	currentTime+=timeElapsed;
++<<<<<<< HEAD
++    }    
++
++    public CustomerQueue getCustomerQueue(){
++        return customerQueue;
++    }
++
++    /**
++     * Returns amount of unoccupied checkouts
++     * @return amount of unoccupied checkouts
++     */
++    public int freeCheckouts(){
++        return checkouts - occupiedCheckouts;
++    }
++
++    public void changeOccupiedCheckouts(int value){
++        occupiedCheckouts += value;
++    }
++}
++=======
++    }
++
++
++    /**
++     * Checks if someone is in Line waiting to pay.
++     * @return true if a customer is in line
++     * @return false if there is no line
++     */
++    public boolean CustomerInLine(){
++        if(customerQueue.size() == 0){
++            return false;
++        }
++        else{
++            return true;
++        }
++    }
++    public boolean FreeCheckout(){
++        //kolla om det finns en ledig snabbkasssa
++    }
++
++
++    
++}
++
++>>>>>>> parent of 8d6e2f6 (Merge branch 'main' of https://github.com/mvhhampek/lab5)
+Index: src/lab5/general/Event.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package lab5.general;\r\nimport lab5.store.Customer;\r\npublic abstract class Event {\r\n\t\r\n\tEventQueue eventQueue;\r\n\tState state;\r\n\r\n\tpublic abstract void execute();\r\n\tpublic abstract double getTime();\r\n\tpublic abstract Customer getCustomer();\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/lab5/general/Event.java b/src/lab5/general/Event.java
+--- a/src/lab5/general/Event.java	
++++ b/src/lab5/general/Event.java	
+@@ -1,12 +1,12 @@
+ package lab5.general;
+-import lab5.store.Customer;
++
+ public abstract class Event {
+ 	
+ 	EventQueue eventQueue;
+ 	State state;
+ 
+-	public abstract void execute();
+-	public abstract double getTime();
+-	public abstract Customer getCustomer();
++	abstract void execute();
++	abstract double getTime();
++	abstract Customer getCustomer();
+ 
+ }
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"7810aef3-f396-4df4-8d6c-81f5a6bf8506\" name=\"Changes\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/src/lab5/store/PayEvent.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/lab5/store/PayEvent.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/lab5/store/StoreState.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/lab5/store/StoreState.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"263i31mNuuVCpxAq5Wwg9swi5Jl\" />\r\n  <component name=\"ProjectLevelVcsManager\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"ASKED_ADD_EXTERNAL_FILES\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\r\n    <property name=\"SHARE_PROJECT_CONFIGURATION_FILES\" value=\"true\" />\r\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\r\n    <property name=\"project.structure.last.edited\" value=\"Modules\" />\r\n    <property name=\"project.structure.proportion\" value=\"0.0\" />\r\n    <property name=\"project.structure.side.proportion\" value=\"0.2\" />\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration default=\"true\" type=\"JetRunConfigurationType\">\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"KotlinStandaloneScriptRunConfigurationType\">\r\n      <option name=\"filePath\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"7810aef3-f396-4df4-8d6c-81f5a6bf8506\" name=\"Changes\" comment=\"\" />\r\n      <created>1646658468453</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1646658468453</updated>\r\n      <workItem from=\"1646658469761\" duration=\"7354000\" />\r\n      <workItem from=\"1646669458500\" duration=\"1340000\" />\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -1,9 +1,8 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="7810aef3-f396-4df4-8d6c-81f5a6bf8506" name="Changes" comment="">
+-      <change beforePath="$PROJECT_DIR$/src/lab5/store/PayEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lab5/store/PayEvent.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/lab5/store/StoreState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lab5/store/StoreState.java" afterDir="false" />
++    <list default="true" id="7810aef3-f396-4df4-8d6c-81f5a6bf8506" name="Changes" comment="huhih">
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -26,6 +25,7 @@
+   </component>
+   <component name="PropertiesComponent">
+     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
++    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+@@ -33,19 +33,6 @@
+     <property name="project.structure.last.edited" value="Modules" />
+     <property name="project.structure.proportion" value="0.0" />
+     <property name="project.structure.side.proportion" value="0.2" />
+-  </component>
+-  <component name="RunManager">
+-    <configuration default="true" type="JetRunConfigurationType">
+-      <method v="2">
+-        <option name="Make" enabled="true" />
+-      </method>
+-    </configuration>
+-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+-      <option name="filePath" />
+-      <method v="2">
+-        <option name="Make" enabled="true" />
+-      </method>
+-    </configuration>
+   </component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+@@ -56,8 +43,33 @@
+       <option name="presentableId" value="Default" />
+       <updated>1646658468453</updated>
+       <workItem from="1646658469761" duration="7354000" />
+-      <workItem from="1646669458500" duration="1340000" />
++      <workItem from="1646669458500" duration="1572000" />
++      <workItem from="1646751503650" duration="48000" />
++      <workItem from="1646751588663" duration="705000" />
++      <workItem from="1646752442416" duration="57000" />
++    </task>
++    <task id="LOCAL-00001" summary="Fixade lite med payEvent">
++      <created>1646670898084</created>
++      <option name="number" value="00001" />
++      <option name="presentableId" value="LOCAL-00001" />
++      <option name="project" value="LOCAL" />
++      <updated>1646670898084</updated>
++    </task>
++    <task id="LOCAL-00002" summary="Fixade lite med payEvent och skapade två metoder i storeState">
++      <created>1646670940533</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1646670940533</updated>
+     </task>
++    <task id="LOCAL-00003" summary="huhih">
++      <created>1646751979348</created>
++      <option name="number" value="00003" />
++      <option name="presentableId" value="LOCAL-00003" />
++      <option name="project" value="LOCAL" />
++      <updated>1646751979348</updated>
++    </task>
++    <option name="localTasksCounter" value="4" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -76,5 +88,9 @@
+   </component>
+   <component name="VcsManagerConfiguration">
+     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
++    <MESSAGE value="Fixade lite med payEvent" />
++    <MESSAGE value="Fixade lite med payEvent och skapade två metoder i storeState" />
++    <MESSAGE value="huhih" />
++    <option name="LAST_COMMIT_MESSAGE" value="huhih" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: src/lab5/store/EndEvent.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package lab5.store;\r\n\r\nimport lab5.general.Event;\r\n\r\npublic class EndEvent extends Event  {\r\n\r\n\tpublic void execute() {\r\n\r\n\t}\r\n\r\n\tpublic double getTime() {\r\n\r\n\t\treturn 0;\r\n\t}\r\n\r\n\tpublic Customer getCustomer(){\r\n\t\treturn null;\r\n\t}\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/lab5/store/EndEvent.java b/src/lab5/store/EndEvent.java
+--- a/src/lab5/store/EndEvent.java	
++++ b/src/lab5/store/EndEvent.java	
+@@ -4,16 +4,16 @@
+ 
+ public class EndEvent extends Event  {
+ 
+-	public void execute() {
++	void execute() {
+ 
+ 	}
+ 
+-	public double getTime() {
++	double getTime() {
+ 
+ 		return 0;
+ 	}
+ 
+-	public Customer getCustomer(){
++	Customer getCustomer(){
+ 		return null;
+ 	}
+ }
+Index: src/lab5/store/CloseEvent.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package lab5.store;\r\n\r\nimport lab5.general.Event;\r\n\r\npublic class CloseEvent extends Event  {\r\n\tpublic void execute() {\r\n\r\n\t}\r\n\r\n\tpublic double getTime() {\r\n\r\n\t\treturn 0;\r\n\t}\r\n\r\n\tpublic Customer getCustomer(){\r\n\t\treturn null;\r\n\t}\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/lab5/store/CloseEvent.java b/src/lab5/store/CloseEvent.java
+--- a/src/lab5/store/CloseEvent.java	
++++ b/src/lab5/store/CloseEvent.java	
+@@ -3,16 +3,16 @@
+ import lab5.general.Event;
+ 
+ public class CloseEvent extends Event  {
+-	public void execute() {
++	void execute() {
+ 
+ 	}
+ 
+-	public double getTime() {
++	double getTime() {
+ 
+ 		return 0;
+ 	}
+ 
+-	public Customer getCustomer(){
++	Customer getCustomer(){
+ 		return null;
+ 	}
+ 
+Index: src/lab5/store/PickEvent.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package lab5.store;\r\n\r\nimport lab5.general.Event;\r\nimport lab5.general.State;\r\nimport lab5.general.EventQueue;\r\n\r\npublic class PickEvent extends Event {\r\n\tprivate Customer customer;\r\n\tprivate State state;\r\n\tprivate EventQueue eventQueue;\r\n\tprivate double time;\r\n\tprivate StoreState storeState;\r\n\tprivate CustomerQueue customerQueue;\r\n\r\n\tpublic PickEvent(State state, EventQueue eventQueue, double time) {\r\n\t\tthis.state = state;\r\n\t\tthis.eventQueue = eventQueue;\r\n\t\tthis.time = time;\r\n\t\tstoreState = state.getStore();\r\n\t\tcustomerQueue = storeState.getCustomerQueue();\r\n\t}\r\n\r\n\tpublic void execute() {\r\n\t\tif (storeState.freeCheckouts() > 0) {\r\n\t\t\teventQueue.push(new PayEvent(state, eventQueue, time));\r\n\t\t} else {\r\n\t\t\t// ställ i kön och sedan nytt pay event?\r\n\r\n\t\t\t// ställ(the kund).in.theKö();\r\n\t\t\teventQueue.push(new PayEvent(state, eventQueue, time));\r\n\t\t}\r\n\r\n\t}\r\n\r\n\tpublic double getTime() {\r\n\t\treturn time;\r\n\t}\r\n\r\n\tpublic Customer getCustomer() {\r\n\t\treturn customer;\r\n\t}\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/lab5/store/PickEvent.java b/src/lab5/store/PickEvent.java
+--- a/src/lab5/store/PickEvent.java	
++++ b/src/lab5/store/PickEvent.java	
+@@ -1,17 +1,11 @@
+ package lab5.store;
+ 
+ import lab5.general.Event;
+-import lab5.general.State;
+-import lab5.general.EventQueue;
+ 
+-public class PickEvent extends Event {
++public class PickEvent extends Event  {
+ 	private Customer customer;
+-	private State state;
+-	private EventQueue eventQueue;
+-	private double time;
+-	private StoreState storeState;
+-	private CustomerQueue customerQueue;
+ 
++<<<<<<< HEAD
+ 	public PickEvent(State state, EventQueue eventQueue, double time) {
+ 		this.state = state;
+ 		this.eventQueue = eventQueue;
+@@ -23,20 +17,26 @@
+ 	public void execute() {
+ 		if (storeState.freeCheckouts() > 0) {
+ 			eventQueue.push(new PayEvent(state, eventQueue, time));
++			
++			
+ 		} else {
+ 			// ställ i kön och sedan nytt pay event?
+ 
+ 			// ställ(the kund).in.theKö();
+ 			eventQueue.push(new PayEvent(state, eventQueue, time));
+ 		}
++=======
++	void execute() {
++>>>>>>> parent of 8d6e2f6 (Merge branch 'main' of https://github.com/mvhhampek/lab5)
+ 
+ 	}
+ 
+-	public double getTime() {
+-		return time;
++	double getTime() {
++
++		return 0;
+ 	}
+ 
+-	public Customer getCustomer() {
++	Customer getCustomer(){
+ 		return customer;
+ 	}
+ }
+Index: .project
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<projectDescription>\r\n\t<name>lab5</name>\r\n\t<comment></comment>\r\n\t<projects>\r\n\t</projects>\r\n\t<buildSpec>\r\n\t\t<buildCommand>\r\n\t\t\t<name>org.eclipse.jdt.core.javabuilder</name>\r\n\t\t\t<arguments>\r\n\t\t\t</arguments>\r\n\t\t</buildCommand>\r\n\t</buildSpec>\r\n\t<natures>\r\n\t\t<nature>org.eclipse.jdt.core.javanature</nature>\r\n\t</natures>\r\n\t<filteredResources>\r\n\t\t<filter>\r\n\t\t\t<id>1646738092884</id>\r\n\t\t\t<name></name>\r\n\t\t\t<type>30</type>\r\n\t\t\t<matcher>\r\n\t\t\t\t<id>org.eclipse.core.resources.regexFilterMatcher</id>\r\n\t\t\t\t<arguments>node_modules|.git|__CREATED_BY_JAVA_LANGUAGE_SERVER__</arguments>\r\n\t\t\t</matcher>\r\n\t\t</filter>\r\n\t</filteredResources>\r\n</projectDescription>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.project b/.project
+--- a/.project	
++++ b/.project	
+@@ -14,15 +14,4 @@
+ 	<natures>
+ 		<nature>org.eclipse.jdt.core.javanature</nature>
+ 	</natures>
+-	<filteredResources>
+-		<filter>
+-			<id>1646738092884</id>
+-			<name></name>
+-			<type>30</type>
+-			<matcher>
+-				<id>org.eclipse.core.resources.regexFilterMatcher</id>
+-				<arguments>node_modules|.git|__CREATED_BY_JAVA_LANGUAGE_SERVER__</arguments>
+-			</matcher>
+-		</filter>
+-	</filteredResources>
+ </projectDescription>
+Index: src/lab5/general/State.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package lab5.general;\r\nimport lab5.store.StoreState;\r\nimport java.util.Observable;\r\n\r\n@SuppressWarnings(\"deprecation\")\r\npublic class State extends Observable {\r\n    private Simulator simulator;\r\n    private StoreState storeState; \r\n\r\n\r\n    public State(Simulator s){\r\n        simulator=s;\r\n    }\r\n\r\n\r\n    public StoreState getStore(){\r\n        return storeState;\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/lab5/general/State.java b/src/lab5/general/State.java
+--- a/src/lab5/general/State.java	
++++ b/src/lab5/general/State.java	
+@@ -1,20 +1,10 @@
+ package lab5.general;
+-import lab5.store.StoreState;
++
+ import java.util.Observable;
+ 
+-@SuppressWarnings("deprecation")
+ public class State extends Observable {
+     private Simulator simulator;
+-    private StoreState storeState; 
+-
+-
+     public State(Simulator s){
+         simulator=s;
+     }
+-
+-
+-    public StoreState getStore(){
+-        return storeState;
+-    }
+-
+ }
+Index: src/lab5/store/time/PickTime.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/lab5/store/time/PickTime.java b/src/lab5/store/time/PickTime.java
+new file mode 100644
+--- /dev/null	
++++ b/src/lab5/store/time/PickTime.java	
+@@ -0,0 +1,5 @@
++package lab5.store.time;
++
++public class PickTime {
++
++}
+Index: src/lab5/general/EventQueue.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package lab5.general;\r\n\r\npublic class EventQueue {\r\n\r\n    private Event[] queue;\r\n\r\n    public EventQueue(){\r\n        queue = new Event[0];\r\n    }\r\n\r\n    /**\r\n     * Adds event to queue in correct location\r\n     * \r\n     * @param e Event to add\r\n     */\r\n    public void push(Event e){\r\n        int n = size();\r\n        Event[] temp = new Event[n + 1];       \r\n        for (int i = 0; i < n; i++){\r\n            temp[i] = queue[i];\r\n        }\r\n        temp[n] = e;\r\n        queue = temp;\r\n        sort();\r\n    }\r\n\r\n    /**\r\n     * Sorts queue in ascending order (Bubble sort)\r\n     */\r\n    private void sort() {\r\n        for (int i = 0; i < size(); i++) {\r\n            for (int j = i + 1; j < size(); j++) {\r\n                Event temp;\r\n                if (queue[i].getTime() > queue[j].getTime()) {\r\n                    temp = queue[i];\r\n                    queue[i] = queue[j];\r\n                    queue[j] = temp;\r\n                }\r\n            }\r\n        } \r\n    }\r\n\r\n    /**\r\n     * Removes and returns the next element in queue\r\n     */\r\n    public Event pop() {\r\n        int n = size();\r\n        Event[] temp = new Event[n - 1];\r\n        Event e = queue[0];\r\n        for (int i = 1; i < n; i++) {\r\n            temp[i - 1] = queue[i];\r\n        }\r\n        queue = temp;\r\n        return e;\r\n    }\r\n\r\n    /**\r\n     * Returns size of EventQueue\r\n     */\r\n    public int size() {\r\n        return queue.length;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/lab5/general/EventQueue.java b/src/lab5/general/EventQueue.java
+--- a/src/lab5/general/EventQueue.java	
++++ b/src/lab5/general/EventQueue.java	
+@@ -1,5 +1,7 @@
+ package lab5.general;
+ 
++import lab5.Event;
++
+ public class EventQueue {
+ 
+     private Event[] queue;
+@@ -10,8 +12,6 @@
+ 
+     /**
+      * Adds event to queue in correct location
+-     * 
+-     * @param e Event to add
+      */
+     public void push(Event e){
+         int n = size();
+@@ -25,9 +25,9 @@
+     }
+ 
+     /**
+-     * Sorts queue in ascending order (Bubble sort)
++     * Sorts queue in ascending order  
+      */
+-    private void sort() {
++    private void sort(){
+         for (int i = 0; i < size(); i++) {
+             for (int j = i + 1; j < size(); j++) {
+                 Event temp;
+@@ -43,7 +43,7 @@
+     /**
+      * Removes and returns the next element in queue
+      */
+-    public Event pop() {
++    public Event pop(){
+         int n = size();
+         Event[] temp = new Event[n - 1];
+         Event e = queue[0];
+@@ -54,10 +54,8 @@
+         return e;
+     }
+ 
+-    /**
+-     * Returns size of EventQueue
+-     */
+-    public int size() {
++    public int size(){
+         return queue.length;
+     }
++
+ }
+\ No newline at end of file
