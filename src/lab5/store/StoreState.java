@@ -1,10 +1,16 @@
 package lab5.store;
 
+import lab5.general.Simulator;
 import lab5.general.State;
 import java.lang.reflect.Array;
 
 public class StoreState extends State {
-    public static CustomerFactory customerFactory;
+    public StoreState(Simulator s) {
+        super(s);
+        //TODO Auto-generated constructor stub
+    }
+
+    public CustomerFactory customerFactory;
     public CustomerQueue customerQueue;
     private Array customers;
     private boolean open;
