@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7810aef3-f396-4df4-8d6c-81f5a6bf8506" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/lab5/store/PayEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lab5/store/PayEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lab5/store/StoreState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lab5/store/StoreState.java" afterDir="false" />
+    <list default="true" id="7810aef3-f396-4df4-8d6c-81f5a6bf8506" name="Changes" comment="huhih">
+      <change afterPath="$PROJECT_DIR$/src/lab5/store/time/PickTime.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/lab5/Optimize.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/lab5/RunSim.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/lab5/general/Event.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/lab5/general/EventQueue.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/lab5/general/PrintView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/lab5/general/Simulator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/lab5/general/State.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/lab5/general/View.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/lab5/store/ArrivalEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/lab5/store/CloseEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/lab5/store/Customer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/lab5/store/CustomerFactory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/lab5/store/CustomerQueue.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/lab5/store/EndEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/lab5/store/PickEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/lab5/store/StartEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/lab5/store/time/ExponentialRandomStream.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/lab5/store/time/UniformRandomStream.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lab5/store/CloseEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lab5/store/CloseEvent.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,24 +47,12 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="jdk.selected.JAVA_MODULE" value="openjdk-17" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
-  </component>
-  <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -57,6 +64,8 @@
       <updated>1646658468453</updated>
       <workItem from="1646658469761" duration="7354000" />
       <workItem from="1646669458500" duration="1340000" />
+      <workItem from="1646753873578" duration="4000" />
+      <workItem from="1646753899052" duration="935000" />
     </task>
     <servers />
   </component>
