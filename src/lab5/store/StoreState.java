@@ -11,7 +11,9 @@ public class StoreState extends State  {
     private int maxCustomers;
     private int customersInStore;
     private int checkouts;
-    
+
+    private int missedCostumers ////<-------
+
     private double openTime;
     private double currentTime;
 

@@ -34,4 +34,5 @@ public class ArrivalEvent extends Event  {
 		return customer;
 	}
 
+
 }
