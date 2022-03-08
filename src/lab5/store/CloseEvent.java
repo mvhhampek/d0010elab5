@@ -3,16 +3,16 @@ package lab5.store;
 import lab5.general.Event;
 
 public class CloseEvent extends Event  {
-	void execute() {
+	public void execute() {
 
 	}
 
-	double getTime() {
+	public double getTime() {
 
 		return 0;
 	}
 
-	Customer getCustomer(){
+	public Customer getCustomer(){
 		return null;
 	}
 

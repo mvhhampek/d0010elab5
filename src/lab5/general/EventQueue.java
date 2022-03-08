@@ -1,7 +1,5 @@
 package lab5.general;
 
-import lab5.Event;
-
 public class EventQueue {
 
     private Event[] queue;
@@ -12,6 +10,8 @@ public class EventQueue {
 
     /**
      * Adds event to queue in correct location
+     * 
+     * @param e Event to add
      */
     public void push(Event e){
         int n = size();
@@ -25,9 +25,9 @@ public class EventQueue {
     }
 
     /**
-     * Sorts queue in ascending order  
+     * Sorts queue in ascending order (Bubble sort)
      */
-    private void sort(){
+    private void sort() {
         for (int i = 0; i < size(); i++) {
             for (int j = i + 1; j < size(); j++) {
                 Event temp;
@@ -43,7 +43,7 @@ public class EventQueue {
     /**
      * Removes and returns the next element in queue
      */
-    public Event pop(){
+    public Event pop() {
         int n = size();
         Event[] temp = new Event[n - 1];
         Event e = queue[0];
@@ -54,8 +54,10 @@ public class EventQueue {
         return e;
     }
 
-    public int size(){
+    /**
+     * Returns size of EventQueue
+     */
+    public int size() {
         return queue.length;
     }
-
 }
