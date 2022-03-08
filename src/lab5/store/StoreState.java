@@ -71,7 +71,9 @@ public class StoreState extends State  {
     	currentTime+=timeElapsed;
     }
 
-
+    public CustomerQueue getCustomerQueue(){
+        return customerQueue;
+    }
     
 }
 
