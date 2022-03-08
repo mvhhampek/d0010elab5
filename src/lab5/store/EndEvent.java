@@ -11,7 +11,7 @@ public class EndEvent extends Event  {
 
 	public double getTime() {
 
-		return 0;
+		return 999;
 	}
 
 	public Customer getCustomer(){
