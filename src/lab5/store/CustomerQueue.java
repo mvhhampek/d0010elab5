@@ -6,10 +6,12 @@ import java.util.ArrayList;
 
 public class CustomerQueue {
 
-	private ArrayList<Object> queue = new ArrayList<Object>();
+	private ArrayList<Object> queue;
 	private int maxSize = 0;
 
-
+    public CustomerQueue(){
+	    queue = new ArrayList<Object>();
+    }
 	public void add(Object arg0) {
 		queue.add(arg0);
 		if (queue.size() < maxSize) {
@@ -26,7 +28,12 @@ public class CustomerQueue {
 
 
 	public boolean isEmpty() {
-		return queue.isEmpty();
+		if(this.size() == 0){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 
 	public int maxSize() {
@@ -35,7 +42,7 @@ public class CustomerQueue {
 
 	public void removeFirst() throws NoSuchElementException {
 
-		if (queue.size() == 0) {
+		if (queue.isEmpty()) {
 			throw new NoSuchElementException();
 		}
 		queue.remove(0);
