@@ -24,7 +24,7 @@ public class StoreState {
     private int missedCostumers;
     private int maxCheckouts;
     private int lambda;// customers per timme
-
+    private long seed;
     
 
 
@@ -37,6 +37,7 @@ public class StoreState {
         setMissedCostumers(0);
         this.maxCheckouts = maxCheckouts;
         this.maxCustomers = maxCustomers;
+        this.seed = seed;
 
     }
 
@@ -180,6 +181,9 @@ public class StoreState {
     }
     public double getMinPayTime(){
         return minPay;
+    }
+    public long getSeed(){
+        return seed;
     }
 
 }
