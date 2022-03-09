@@ -1,5 +1,13 @@
 package lab5.general;
 
-public class PrintView {
+import java.util.Observable;
+
+public class PrintView extends View {
+
+    @Override
+    public void update(Observable o, Object arg) {
+        // TODO Auto-generated method stub
+        
+    }
 
 }
