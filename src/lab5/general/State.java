@@ -14,8 +14,9 @@ public class State extends Observable {
         return storeState;
     }
 
+    // bör anroppas varje gång ett event läggs till i eventqueue
     public void update(){
-        
+
 
         setChanged();
         notifyObservers();
