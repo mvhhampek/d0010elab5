@@ -7,11 +7,18 @@ import java.util.Observable;
 public class State extends Observable {
     private StoreState storeState;
 
-    public State(StoreState storeState){
+    public State(StoreState storeState, View view){
         this.storeState = storeState;
     }
     public StoreState getStore() {
         return storeState;
+    }
+
+    public void update(){
+        
+
+        setChanged();
+        notifyObservers();
     }
 
 

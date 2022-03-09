@@ -3,12 +3,14 @@ package lab5.general;
 import java.util.Observable;
 import lab5.store.StoreState;
 
+@SuppressWarnings("deprecation")
 public class PrintView extends View {
     private State state;
     private StoreState storeState;
 
     public PrintView(State s) {
         state = s;
+        s.addObserver(this);
         storeState = s.getStore();
     }
 
