@@ -28,7 +28,6 @@ public class StoreState {
     private boolean simulationRunning;
     public CustomerFactory customerFactory;
     public CustomerQueue customerQueue;
-    private Array customers;
     private boolean open;
     private int maxCustomers;
     private int customersInStore;
