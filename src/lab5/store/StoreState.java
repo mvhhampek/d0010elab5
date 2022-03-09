@@ -17,13 +17,15 @@ public class StoreState {
     private UniformRandomStream pickTime;
     private UniformRandomStream payTime;
 
-    public StoreState(int maxCheckouts, int maxCustomers, int lambda, Double pickMin, double pickMax, double payMin,
+    public StoreState(int maxCheckouts, int maxCustomers, int lambda, double pickMin, double pickMax, double payMin,
             double payMax, long seed) {
-            arriveTime = new ExponentialRandomStream(lambda, seed);
-            pickTime = new UniformRandomStream(minPick, maxPick, seed);
-            payTime = new UniformRandomStream(minPay, maxPay, seed);
-    }
+        arriveTime = new ExponentialRandomStream(lambda, seed);
+        pickTime = new UniformRandomStream(minPick, maxPick, seed);
+        payTime = new UniformRandomStream(minPay, maxPay, seed);
+        closingTime = 10.0;
+        missedCostumers = 0;
 
+    }
 
     private boolean simulationRunning;
     public CustomerFactory customerFactory;
@@ -36,10 +38,8 @@ public class StoreState {
     private int occupiedCheckouts;
     private int missedCostumers;
 
-    private double openTime;
+    private double closingTime;
     private double currentTime;
-
-
 
     /**
      * checks if the store is open/closed.
@@ -50,6 +50,16 @@ public class StoreState {
         return open;
     }
 
+    public double getPickTime(){
+        return pickTime.next();
+    }
+    public double getPayTime(){
+        return payTime.next();
+    }
+    public double getArrivalTime(){
+        return arriveTime.next();
+    }
+
     /**
      * Closes the store.
      */
@@ -57,6 +67,19 @@ public class StoreState {
         open = false;
     }
 
+    /**
+     * Returns state of simulation
+     * @return true if the simulation is running, false otherwise
+     */
+    public boolean getSimRunning(){
+        return simulationRunning;
+    }
+    /**
+     * Ends the simulation
+     */
+    public void endSimulation(){
+        simulationRunning = false;
+    }
     /**
      * 
      * @return true if there is place for more customers in the store
@@ -104,7 +127,7 @@ public class StoreState {
     }
 
     /**
-     * Occupies a checkout 
+     * Occupies a checkout
      */
     public void occupyACheckout() {
         occupiedCheckouts++;
@@ -113,9 +136,8 @@ public class StoreState {
     /**
      * Frees a checkout
      */
-    public void freeACheckout(){
+    public void freeACheckout() {
         occupiedCheckouts--;
     }
-    
 
 }

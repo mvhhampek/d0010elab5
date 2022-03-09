@@ -1,5 +1,7 @@
 package lab5;
+import lab5.general.Simulator;
 import lab5.general.State;
+import lab5.store.StoreState;
 
 
 
@@ -14,5 +16,10 @@ public class RunSim {
         double payMax = 3.0;
         long seed = 1234;
 
+
+        StoreState storeState = new StoreState(maxCheckouts, maxCustomers, lambda, pickMin, pickMax, payMin, payMax, seed);
+        State state = new State(storeState);
+        Simulator simulator = new Simulator(state);
+        simulator.run();
     }
 }
