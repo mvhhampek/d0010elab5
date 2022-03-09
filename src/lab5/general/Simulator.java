@@ -12,7 +12,7 @@ public class Simulator {
 
     public Simulator(State state) {
         this.state = state;
-        this.storeState = state.getStore();
+        storeState = state.getStore();
         eventQueue = new EventQueue();
     }
 

@@ -1,5 +1,5 @@
 package lab5.general;
-
+import lab5.store.StoreState;
 public class EventQueue {
 
     private Event[] queue;
