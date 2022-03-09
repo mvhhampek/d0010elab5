@@ -25,7 +25,7 @@ public class PrintView extends View {
         "Ankomsthastighet, lambda..: " + storeState.getLambda() + "\n"+
         "Plocktider, [P_min..P_max]: " + "[" + storeState.getMinPickTime() +".." + storeState.getMaxPickTime() +"]\n" + 
         "Betaltider, [K_min..K_max]: " + "["+storeState.getMinPayTime()+".."+storeState.getMaxPayTime()+"]\n"+
-        "Frö, f...................:"
+        "Frö, f...................:" + storeState.getSeed() + "\n"+
         "FÖRLOPP\n" + "=======\n" + 
         "Tid Händelse  Kund  ?  led    ledT    I     $    :-(   köat    köT   köar  [Kassakö..]" );
 
