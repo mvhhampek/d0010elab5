@@ -2,18 +2,32 @@ package lab5.store;
 
 import lab5.store.time.*;
 
-import java.lang.reflect.Array;
-
 public class StoreState {
-
+    private double closingTime;
+    private double currentTime;
     private double minPay;
     private double maxPay;
     private double minPick;
     private double maxPick;
-    private int lambda; // customers per timme
+     
     private ExponentialRandomStream arriveTime;
     private UniformRandomStream pickTime;
     private UniformRandomStream payTime;
+    
+    public CustomerFactory customerFactory;
+    public CustomerQueue customerQueue;
+    private boolean simulationRunning;
+    private boolean open;
+    private int maxCustomers;
+    private int customersInStore;
+    private int checkouts;
+    private int occupiedCheckouts;
+    private int missedCostumers;
+    
+    private int lambda;// customers per timme
+
+    
+
 
     public StoreState(int maxCheckouts, int maxCustomers, int lambda, double pickMin, double pickMax, double payMin,
             double payMax, long seed) {
@@ -21,22 +35,23 @@ public class StoreState {
         pickTime = new UniformRandomStream(minPick, maxPick, seed);
         payTime = new UniformRandomStream(minPay, maxPay, seed);
         closingTime = 10.0; //denna får man bestämma själv, körexempel 1 har 10.0, 2 har 8.0
-        missedCostumers = 0;
+        setMissedCostumers(0);
 
     }
 
-    private boolean simulationRunning;
-    public CustomerFactory customerFactory;
-    public CustomerQueue customerQueue;
-    private boolean open;
-    private int maxCustomers;
-    private int customersInStore;
-    private int checkouts;
-    private int occupiedCheckouts;
-    private int missedCostumers;
+    public int getMissedCostumers() {
+        return missedCostumers;
+    }
 
-    private double closingTime;
-    private double currentTime;
+    public void setMissedCostumers(int missedCostumers) {
+        this.missedCostumers = missedCostumers;
+    }
+
+    public int getLambda() {
+        return lambda;
+    }
+
+    
 
     /**
      * checks if the store is open/closed.
@@ -93,7 +108,7 @@ public class StoreState {
      * Increases missedCustomers by 1
      */
     public void missedCustomer() {
-        missedCostumers++;
+        setMissedCostumers(getMissedCostumers() + 1);
     }
 
     public double getCloseTime(){
