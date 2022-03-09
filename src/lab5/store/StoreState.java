@@ -51,7 +51,7 @@ public class StoreState {
         customersInStore--;
     }
 
-    
+
     public double getPickTime(){
         return pickTime.next();
     }
@@ -91,12 +91,15 @@ public class StoreState {
     }
 
     /**
-     * Increased missedCustomers by 1
+     * Increases missedCustomers by 1
      */
     public void missedCustomer() {
         missedCostumers++;
     }
 
+    public double getCloseTime(){
+        return closingTime;
+    }
     /**
      * send the current time
      * 
@@ -105,6 +108,8 @@ public class StoreState {
     public double getTime() {
         return currentTime;
     }
+
+
 
     /**
      * Updates the time.

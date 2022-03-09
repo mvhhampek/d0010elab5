@@ -24,7 +24,7 @@ public class PayEvent extends Event  {
 	public void execute() {
 		storeState.decreaseCustomersInStore();
 		if (!queue.isEmpty()){
-			eventQueue.push(new PayEvent(state, eventQueue, time, queue.pop()));
+			eventQueue.push(new PayEvent(state, eventQueue, time + storeState.getPayTime(), queue.pop()));
 		} else {
 			storeState.freeACheckout();
 		}

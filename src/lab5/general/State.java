@@ -5,7 +5,6 @@ import java.util.Observable;
 
 @SuppressWarnings("deprecation")
 public class State extends Observable {
-    private Simulator simulator;
     private StoreState storeState;
 
     public State(StoreState storeState){
@@ -14,4 +13,6 @@ public class State extends Observable {
     public StoreState getStore() {
         return storeState;
     }
+
+
 }

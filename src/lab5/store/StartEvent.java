@@ -5,13 +5,12 @@ import lab5.general.State;
 import lab5.general.EventQueue;
 
 public class StartEvent extends Event {
-	private Customer customer;
 	private State state;
 	private EventQueue eventQueue;
 	private double time;
 	private StoreState storeState;
 	
-	// skapar ett nytt pick event och arrivalevent
+	// skapar ett nytt arrivalevent
 
 	public StartEvent(State state, EventQueue eventQueue){
 		this.state = state;
@@ -22,11 +21,10 @@ public class StartEvent extends Event {
 
 
 	public void execute() {
-		
+		eventQueue.push(new ArrivalEvent(state, eventQueue, time+storeState.getArrivalTime()));
 	}
 
 	public double getTime() {
-
 		return time;
 	}
 

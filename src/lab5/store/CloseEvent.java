@@ -10,8 +10,7 @@ public class CloseEvent extends Event  {
 	}
 
 	public double getTime() {
-		return storeState.getTime();
-
+		return storeState.getCloseTime();
 	}
 
 	public Customer getCustomer(){
