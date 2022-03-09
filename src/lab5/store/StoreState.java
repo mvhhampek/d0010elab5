@@ -28,8 +28,8 @@ public class StoreState {
     
 
 
-    public StoreState(int maxCheckouts, int maxCustomers, int lambda, double pickMin, double pickMax, double payMin,
-            double payMax, long seed) {
+    public StoreState(int maxCheckouts, int maxCustomers, int lambda, double minPick, double maxPick, double minPay,
+            double maxPay, long seed) {
         arriveTime = new ExponentialRandomStream(lambda, seed);
         pickTime = new UniformRandomStream(minPick, maxPick, seed);
         payTime = new UniformRandomStream(minPay, maxPay, seed);
@@ -38,6 +38,11 @@ public class StoreState {
         this.maxCheckouts = maxCheckouts;
         this.maxCustomers = maxCustomers;
         this.seed = seed;
+        this.maxPay = maxPay;
+        this.minPay = minPay;
+        this.maxPick = maxPick;
+        this.minPick = minPick;
+        this.lambda = lambda;
 
     }
 
