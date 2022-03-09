@@ -45,7 +45,7 @@ public class StoreState {
         return missedCostumers;
     }
 
-    public void setMissedCostumers(int missedCostumers) {
+    private void setMissedCostumers(int missedCostumers) {
         this.missedCostumers = missedCostumers;
     }
 
