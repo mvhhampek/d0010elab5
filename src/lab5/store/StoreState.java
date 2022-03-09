@@ -26,6 +26,9 @@ public class StoreState {
     private int lambda;// customers per timme
     private long seed;
     private int CustomersQueued = 0;
+    private double queStartTime;
+    private double queTime;
+
     
 
 
@@ -192,11 +195,21 @@ public class StoreState {
         return seed;
     }
 
-    public void CustomersQueued(int value){
+    public void customersQueued(int value){
         CustomersQueued += value;
     }
     public int getCustomersQueued(){
         return CustomersQueued;
+    }
+
+    public void startQueueTime(double time){
+        queStartTime = time;
+    }
+    public void addQueueTime(double time){
+         queTime += time - queStartTime;
+    }
+    public double getQueueTime(){
+        return queTime;
     }
 
 }

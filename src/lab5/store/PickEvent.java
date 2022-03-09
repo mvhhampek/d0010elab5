@@ -27,7 +27,9 @@ public class PickEvent extends Event {
 			eventQueue.push(new PayEvent(state, eventQueue, time + storeState.getPayTime(), customer));			
 		} else {
 			customerQueue.add(customer);
-			storeState.CustomersQueued(1);
+			storeState.customersQueued(1);
+			storeState.startQueueTime(storeState.getTime());
+
 		}
 	}
 
