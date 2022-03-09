@@ -25,6 +25,7 @@ public class StoreState {
     private int maxCheckouts;
     private int lambda;// customers per timme
     private long seed;
+    private int CustomersQueued = 0;
     
 
 
@@ -189,6 +190,13 @@ public class StoreState {
     }
     public long getSeed(){
         return seed;
+    }
+
+    public void CustomersQueued(int value){
+        CustomersQueued += value;
+    }
+    public int getCustomersQueued(){
+        return CustomersQueued;
     }
 
 }

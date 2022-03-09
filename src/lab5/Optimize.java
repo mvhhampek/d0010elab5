@@ -18,8 +18,8 @@ public class Optimize {
         new Simulator(state);
         simulator.run();
         String result1 = ("Av " + storeState.getMaxCustomers() + " kunder handlade " + (storeState.getMaxCustomers()-storeState.getMissedCostumers()) + " medan " + storeState.getMissedCostumers() + " missades.");
-        String result2 = ("Total tid " + storeState.getMaxCheckouts() + " varit lediga: " + storeState.getkötid +" te." + "\n" + "Genomsnittlig ledig  kassatid: " + (storeState.getköti()/storeState.getMaxCheckouts()) + " (dvs " + ((storeState.getköti()/storeState.getTime())*100) + "% av tiden från öppning tills sista kunden betalat.");
-        String result3 = ("Totalt  tid " + storeState.getCustomerQueued() + " kunder tvingades  köa: " + storeState.getQueueTime() + " te." + "\n" + "Genomsnittlig kötid: " + (storeState.getQueueTime()/storeState.getCustomerQueued()) + " te.");
+        String result2 = ("Total tid " + storeState.getMaxCheckouts() + " varit lediga: " + storeState.getLedigTid +" te." + "\n" + "Genomsnittlig ledig  kassatid: " + (storeState.getLedigTid()/storeState.getMaxCheckouts()) + " (dvs " + ((storeState.getköti()/storeState.getTime())*100) + "% av tiden från öppning tills sista kunden betalat.");
+        String result3 = ("Totalt  tid " + storeState.getCustomersQueued() + " kunder tvingades  köa: " + storeState.getQueueTime() + " te." + "\n" + "Genomsnittlig kötid: " + (storeState.getQueueTime()/storeState.getCustomersQueued()) + " te.");
 
         return (result1 + result2 + result3);
         }
