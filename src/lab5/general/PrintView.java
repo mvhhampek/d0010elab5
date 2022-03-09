@@ -20,12 +20,12 @@ public class PrintView extends View {
     public void printParameter(){
         System.out.println("PARAMETRAR\n" + 
         "==========\n"+
-        "Antal kassor, n.........: " + "nr of checkouts\n"+
-        "Max som ryms, m.........: " + "max nr of costumers\n"+
-        "Ankomsthastighet, lambda..: " + "siffra\n"+
-        "Plocktider, [P_min..P_max]: " + "[pminpmax]\n"+
-        "Betaltider, [K_min..K_max]: " + "[kminkmax]\n"+
-        "Frö, f...................: " + "frö\n" +
+        "Antal kassor, n.........: " + storeState.getMaxCheckouts() + "\n"+
+        "Max som ryms, m.........: " + storeState.getMaxCustomers() + "\n"+
+        "Ankomsthastighet, lambda..: " + storeState.getLambda() + "\n"+
+        "Plocktider, [P_min..P_max]: " + "[" + storeState.getMinPickTime() +".." + storeState.getMaxPickTime() +"]\n" + 
+        "Betaltider, [K_min..K_max]: " + "["+storeState.getMinPayTime()+".."+storeState.getMaxPayTime()+"]\n"+
+        "Frö, f...................:"
         "FÖRLOPP\n" + "=======\n" + 
         "Tid Händelse  Kund  ?  led    ledT    I     $    :-(   köat    köT   köar  [Kassakö..]" );
 
