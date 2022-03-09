@@ -1,7 +1,6 @@
 package lab5.store;
 
-import lab5.store.time.ExponentialRandomStream;
-import lab5.store.time.UniformRandomStream;
+import lab5.store.time.*;
 
 import java.lang.reflect.Array;
 
@@ -48,7 +47,11 @@ public class StoreState {
     public boolean isOpen() {
         return open;
     }
+    public void decreaseCustomersInStore(){
+        customersInStore--;
+    }
 
+    
     public double getPickTime(){
         return pickTime.next();
     }

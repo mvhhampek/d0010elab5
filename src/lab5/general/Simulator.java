@@ -17,13 +17,10 @@ public class Simulator {
 
     public void run() {
         eventQueue.push(new StartEvent(state, eventQueue));
-        //eventQueue.push(new CloseEvent());
+        eventQueue.push(new CloseEvent());
+        eventQueue.push(new EndEvent()); //tiden 999
         while (storeState.getSimRunning()) {
-            //eventQueue.pop().execute();
-
-            //if (eventQueue.size() == 0){
-            //    eventQueue.push(new EndEvent());
-            //}
+            eventQueue.pop().execute();
         }
     }
 }

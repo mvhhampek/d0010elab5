@@ -22,18 +22,15 @@ public class PayEvent extends Event  {
 	}
 
 	public void execute() {
-		if(!queue.isEmpty()){
-			eventQueue.push(new PayEvent(state, eventQueue, time, (Customer) queue.first()));
+		storeState.decreaseCustomersInStore();
+		if (!queue.isEmpty()){
+			eventQueue.push(new PayEvent(state, eventQueue, time, queue.pop()));
+		} else {
+			storeState.freeACheckout();
 		}
-		else{
-			storeState.occupyACheckout();
-		}
-
-
 	}
 
 	public double getTime() {
-
 		return time;
 	}
 
