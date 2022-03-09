@@ -6,7 +6,7 @@ public class EndEvent extends Event  {
 	private StoreState storeState;
 
 	public void execute() {
-		storeState.EndSimulation();
+		storeState.endSimulation();
 	}
 
 	public double getTime() {
