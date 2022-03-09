@@ -3,8 +3,6 @@ import lab5.general.Simulator;
 import lab5.general.State;
 import lab5.store.StoreState;
 
-
-
 public class RunSim {
     public static void main(String[] args){
         

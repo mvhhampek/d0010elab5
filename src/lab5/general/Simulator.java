@@ -12,12 +12,13 @@ public class Simulator {
 
     public Simulator(State state) {
         this.state = state;
+        this.storeState = state.getStore();
         eventQueue = new EventQueue();
     }
 
     public void run() {
         eventQueue.push(new StartEvent(state, eventQueue));
-        eventQueue.push(new CloseEvent());
+        eventQueue.push(new CloseEvent(state));
         eventQueue.push(new EndEvent()); //tiden 999
         while (storeState.getSimRunning()) {
             eventQueue.pop().execute();
