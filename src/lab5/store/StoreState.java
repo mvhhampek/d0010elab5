@@ -20,10 +20,9 @@ public class StoreState {
     private boolean open;
     private int maxCustomers;
     private int customersInStore;
-    private int checkouts;
     private int occupiedCheckouts;
     private int missedCostumers;
-    
+    private int maxCheckouts;
     private int lambda;// customers per timme
 
     
@@ -36,6 +35,8 @@ public class StoreState {
         payTime = new UniformRandomStream(minPay, maxPay, seed);
         closingTime = 10.0; //denna får man bestämma själv, körexempel 1 har 10.0, 2 har 8.0
         setMissedCostumers(0);
+        this.maxCheckouts = maxCheckouts;
+        this.maxCustomers = maxCustomers;
 
     }
 
@@ -43,7 +44,7 @@ public class StoreState {
         return missedCostumers;
     }
 
-    public void setMissedCostumers(int missedCostumers) {
+    private void setMissedCostumers(int missedCostumers) {
         this.missedCostumers = missedCostumers;
     }
 
@@ -144,7 +145,7 @@ public class StoreState {
      * @return amount of unoccupied checkouts
      */
     public int getFreeCheckouts() {
-        return checkouts - occupiedCheckouts;
+        return maxCheckouts - occupiedCheckouts;
     }
 
     /**
@@ -159,6 +160,26 @@ public class StoreState {
      */
     public void freeACheckout() {
         occupiedCheckouts--;
+    }
+
+    public int getMaxCheckouts(){
+        return maxCheckouts;
+    }
+
+    public int getMaxCustomers(){
+        return maxCustomers;
+    }
+    public double getMaxPickTime(){
+        return maxPick;
+    }
+    public double getMinPickTime(){
+        return minPick;
+    }
+    public double getMaxPayTime(){
+        return maxPay;
+    }
+    public double getMinPayTime(){
+        return minPay;
     }
 
 }
