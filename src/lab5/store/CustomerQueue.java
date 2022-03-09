@@ -3,21 +3,21 @@ package lab5.store;
 import java.util.NoSuchElementException;
 
 public class CustomerQueue {
-	
-	private Object[] queue;
+
+	private Customer[] queue;
 	private int mSize;
 
 	public CustomerQueue() {
-		queue = new Object[0];
+		queue = new Customer[0];
 		mSize = 0;
 	}
 
-	public void add(Object item) {
+	public void add(Customer item) {
 		if (mSize == this.size()) {
 			mSize++;
 		}
 		int n = this.size();
-		Object[] temp = new Object[n + 1];
+		Customer[] temp = new Customer[n + 1];
 		for (int i = 0; i < n; i++) {
 			temp[i] = queue[i];
 		}
@@ -25,7 +25,13 @@ public class CustomerQueue {
 		queue = temp;
 	}
 
-	public Object first() throws NoSuchElementException {
+	public Customer pop() {
+		Customer temp = first();
+		removeFirst();
+		return temp;
+	}
+
+	public Customer first() throws NoSuchElementException {
 		if (isEmpty()) {
 			throw new NoSuchElementException();
 		} else {
@@ -46,7 +52,7 @@ public class CustomerQueue {
 			throw new NoSuchElementException();
 		} else {
 			int n = this.size();
-			Object[] temp = new Object[n - 1];
+			Customer[] temp = new Customer[n - 1];
 			for (int i = 1; i < n; i++) {
 				// Skippar första elementet i queue
 				temp[i - 1] = queue[i];
@@ -59,6 +65,4 @@ public class CustomerQueue {
 		return queue.length;
 	}
 
-
 }
-

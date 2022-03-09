@@ -24,13 +24,10 @@ public class PickEvent extends Event {
 	public void execute() {
 		if (storeState.getFreeCheckouts() > 0) {
 			storeState.occupyACheckout();
-			eventQueue.push(new PayEvent(state, eventQueue, time, customer));
-			
-			
+			eventQueue.push(new PayEvent(state, eventQueue, time, customer));			
 		} else {
 			customerQueue.add(customer);
 		}
-
 	}
 
 	public double getTime() {

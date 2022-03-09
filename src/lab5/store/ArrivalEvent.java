@@ -23,6 +23,7 @@ public class ArrivalEvent extends Event  {
 
 	public void execute() {
 		if(storeState.isOpen() && storeState.space()){
+			time += storeState.getArrivalTime();
 			eventQueue.push(new PickEvent(state, eventQueue, time, storeState.customerFactory.createCustomer()));
 			eventQueue.push(new ArrivalEvent(state, eventQueue, time));
 		}
