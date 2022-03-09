@@ -14,6 +14,5 @@ public class RunSim {
         double payMax = 3.0;
         long seed = 1234;
 
-        
     }
 }

@@ -1,14 +1,29 @@
 package lab5.store;
 
-import lab5.general.Simulator;
 import lab5.general.State;
+import lab5.store.time.ExponentialRandomStream;
+import lab5.store.time.UniformRandomStream;
+
 import java.lang.reflect.Array;
 
-public class StoreState extends State {
-    public StoreState(Simulator s) {
-        super(s);
-        //TODO Auto-generated constructor stub
+public class StoreState {
+
+    private double minPay;
+    private double maxPay;
+    private double minPick;
+    private double maxPick;
+    private int lambda; // customers per timme
+    private ExponentialRandomStream arriveTime;
+    private UniformRandomStream pickTime;
+    private UniformRandomStream payTime;
+
+    public StoreState(int maxCheckouts, int maxCustomers, int lambda, Double pickMin, double pickMax, double payMin,
+            double payMax, long seed) {
+            arriveTime = new ExponentialRandomStream(lambda, seed);
+            pickTime = new UniformRandomStream(minPick, maxPick, seed);
+            payTime = new UniformRandomStream(minPay, maxPay, seed);
     }
+
 
     private boolean simulationRunning;
     public CustomerFactory customerFactory;
@@ -24,33 +39,12 @@ public class StoreState extends State {
     private double openTime;
     private double currentTime;
 
-    private double minPayTime;
-    private double maxPayTime;
-    private double minPickTime;
-    private double maxPickTime;
-    private int lambda; // customers per timme
 
 
     /**
-     * Checks if the simulation is running.
-     *
-     * @return returns a boolean, true if simulation is running and false if the simulation has ended.
-     */
-    public boolean SimulationIsRunning(){
-        return simulationRunning;
-    }
-
-    /**
-     * Ends the Simulation.
-     */
-    public void EndSimulation(){
-    simulationRunning = false;
-    }
-
-    /**
-     * Checks if the store is open/closed.
+     * checks if the store is open/closed.
      * 
-     * @return returns a boolean, true if the store is opened and false if the store is closed.
+     * @return returns a bolian depending if the store is open or not
      */
     public boolean isOpen() {
         return open;
@@ -105,15 +99,23 @@ public class StoreState extends State {
      * 
      * @return amount of unoccupied checkouts
      */
-    public int freeCheckouts() {
+    public int getFreeCheckouts() {
         return checkouts - occupiedCheckouts;
     }
 
     /**
-     * +1 to occupy a checkout, -1 to free one
-     * @param value value to change occupiedCheckouts by
+     * Occupies a checkout 
      */
-    public void changeOccupiedCheckouts(int value) {
-        occupiedCheckouts += value;
+    public void occupyACheckout() {
+        occupiedCheckouts++;
     }
+
+    /**
+     * Frees a checkout
+     */
+    public void freeACheckout(){
+        occupiedCheckouts--;
+    }
+    
+
 }
