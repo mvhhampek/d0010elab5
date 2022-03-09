@@ -1,6 +1,5 @@
 package lab5.store;
 
-import lab5.general.State;
 import lab5.store.time.ExponentialRandomStream;
 import lab5.store.time.UniformRandomStream;
 
@@ -22,7 +21,7 @@ public class StoreState {
         arriveTime = new ExponentialRandomStream(lambda, seed);
         pickTime = new UniformRandomStream(minPick, maxPick, seed);
         payTime = new UniformRandomStream(minPay, maxPay, seed);
-        closingTime = 10.0;
+        closingTime = 10.0; //denna får man bestämma själv, körexempel 1 har 10.0, 2 har 8.0
         missedCostumers = 0;
 
     }
