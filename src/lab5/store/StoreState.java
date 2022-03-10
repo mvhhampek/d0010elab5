@@ -200,8 +200,17 @@ public class StoreState {
     public void increaseQueuedTime(double value){
         totalQueueTime += value;
     }
+
+    public boolean occuppied() {
+        return getFreeCheckouts() == 0;
+    }
+    public void free(){
+        return getFreeCheckouts() !=0;
+    }
+
     public void increaseFreeCashierTime(double value){
-        freeCashierTime += value;
+
+        freeCashierTime = freeCashierTime + (timeOffree - timeOfOcc);
     }
 
 }

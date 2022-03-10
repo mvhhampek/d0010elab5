@@ -36,8 +36,9 @@ public class PrintView extends View {
 
     }
     public void printEvents(Event e){
+        String open =  storeState.isOpen() ? "Ö" : "S";
         System.out.println(storeState.getTime() + " " + e.getName() + " " + e.getCustomer().getId() +
-         " " + storeState.isOpen() ? 'Ö' : 'S' + " " + storeState.getFreeCheckouts() + " " + storeState.);
+         " " + open + " " + storeState.getFreeCheckouts() + " " + );
     }
     public void results(){
 
