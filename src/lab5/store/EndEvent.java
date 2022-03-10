@@ -17,4 +17,8 @@ public class EndEvent extends Event  {
 	public Customer getCustomer(){
 		return null;
 	}
+
+	public String getName() {
+		return "Stopp";
+	}
 }

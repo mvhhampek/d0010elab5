@@ -4,8 +4,7 @@ import lab5.general.State;
 import lab5.general.Event;
 import lab5.general.EventQueue;
 
-
-public class PayEvent extends Event  {
+public class PayEvent extends Event {
 	private Customer customer;
 	private State state;
 	private EventQueue eventQueue;
@@ -13,7 +12,7 @@ public class PayEvent extends Event  {
 	private StoreState storeState;
 	private CustomerQueue queue;
 
-	public PayEvent(State state, EventQueue eventQueue, double time, Customer customer){
+	public PayEvent(State state, EventQueue eventQueue, double time, Customer customer) {
 		this.customer = customer;
 		this.state = state;
 		this.eventQueue = eventQueue;
@@ -23,7 +22,7 @@ public class PayEvent extends Event  {
 
 	public void execute() {
 		storeState.decreaseCustomersInStore();
-		if (!queue.isEmpty()){
+		if (!queue.isEmpty()) {
 			eventQueue.push(new PayEvent(state, eventQueue, time + storeState.getPayTime(), queue.pop()));
 			storeState.addQueueTime(storeState.getTime());
 		} else {
@@ -35,7 +34,12 @@ public class PayEvent extends Event  {
 		return time;
 	}
 
-	public Customer getCustomer(){
+	public Customer getCustomer() {
 		return customer;
+
+	}
+
+	public String getName() {
+		return "Betalning";
 	}
 }

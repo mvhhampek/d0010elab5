@@ -43,4 +43,8 @@ public class ArrivalEvent extends Event {
 	public Customer getCustomer() {
 		return customer;
 	}
+
+	public String getName() {
+		return "Ankomst";
+	}
 }

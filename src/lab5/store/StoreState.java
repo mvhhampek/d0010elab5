@@ -1,5 +1,7 @@
 package lab5.store;
 
+import lab5.general.State;
+
 import lab5.store.time.*;
 
 public class StoreState {
@@ -9,11 +11,11 @@ public class StoreState {
     private double maxPay;
     private double minPick;
     private double maxPick;
-     
+
     private ExponentialRandomStream arriveTime;
     private UniformRandomStream pickTime;
     private UniformRandomStream payTime;
-    
+
     public CustomerFactory customerFactory;
     public CustomerQueue customerQueue;
     private boolean simulationRunning;
@@ -23,22 +25,16 @@ public class StoreState {
     private int occupiedCheckouts;
     private int missedCostumers;
     private int maxCheckouts;
-    private int lambda;// customers per timme
+    private int lambda; // customers per timme
     private long seed;
-    private int CustomersQueued = 0;
-    private double queStartTime;
-    private double queTime;
-
-    
-
+    private int customersQueued = 0;
 
     public StoreState(int maxCheckouts, int maxCustomers, int lambda, double minPick, double maxPick, double minPay,
             double maxPay, long seed) {
         arriveTime = new ExponentialRandomStream(lambda, seed);
         pickTime = new UniformRandomStream(minPick, maxPick, seed);
         payTime = new UniformRandomStream(minPay, maxPay, seed);
-        closingTime = 10.0; //denna får man bestämma själv, körexempel 1 har 10.0, 2 har 8.0
-        setMissedCostumers(0);
+        closingTime = 10.0; // denna får man bestämma själv, körexempel 1 har 10.0, 2 har 8.0
         this.maxCheckouts = maxCheckouts;
         this.maxCustomers = maxCustomers;
         this.seed = seed;
@@ -47,6 +43,7 @@ public class StoreState {
         this.maxPick = maxPick;
         this.minPick = minPick;
         this.lambda = lambda;
+        missedCostumers = 0;
 
     }
 
@@ -54,15 +51,9 @@ public class StoreState {
         return missedCostumers;
     }
 
-    private void setMissedCostumers(int missedCostumers) {
-        this.missedCostumers = missedCostumers;
-    }
-
     public int getLambda() {
         return lambda;
     }
-
-    
 
     /**
      * checks if the store is open/closed.
@@ -72,18 +63,20 @@ public class StoreState {
     public boolean isOpen() {
         return open;
     }
-    public void decreaseCustomersInStore(){
+
+    public void decreaseCustomersInStore() {
         customersInStore--;
     }
 
-
-    public double getPickTime(){
+    public double getPickTime() {
         return pickTime.next();
     }
-    public double getPayTime(){
+
+    public double getPayTime() {
         return payTime.next();
     }
-    public double getArrivalTime(){
+
+    public double getArrivalTime() {
         return arriveTime.next();
     }
 
@@ -96,17 +89,20 @@ public class StoreState {
 
     /**
      * Returns state of simulation
+     * 
      * @return true if the simulation is running, false otherwise
      */
-    public boolean getSimRunning(){
+    public boolean getSimRunning() {
         return simulationRunning;
     }
+
     /**
      * Ends the simulation
      */
-    public void endSimulation(){
+    public void endSimulation() {
         simulationRunning = false;
     }
+
     /**
      * 
      * @return true if there is place for more customers in the store
@@ -119,12 +115,14 @@ public class StoreState {
      * Increases missedCustomers by 1
      */
     public void missedCustomer() {
-        setMissedCostumers(getMissedCostumers() + 1);
+        missedCostumers++;
     }
 
-    public double getCloseTime(){
+    public double getCloseTime() {
         return closingTime;
     }
+    
+    
     /**
      * send the current time
      * 
@@ -133,8 +131,6 @@ public class StoreState {
     public double getTime() {
         return currentTime;
     }
-
-
 
     /**
      * Updates the time.
@@ -147,6 +143,14 @@ public class StoreState {
 
     public CustomerQueue getCustomerQueue() {
         return customerQueue;
+    }
+
+    /**
+     * Calculates total queuetime, time cashiers have been unoccupied,
+     * 
+     */
+    public void updatedTime() {
+
     }
 
     /**
@@ -172,44 +176,39 @@ public class StoreState {
         occupiedCheckouts--;
     }
 
-    public int getMaxCheckouts(){
+    public int getMaxCheckouts() {
         return maxCheckouts;
     }
 
-    public int getMaxCustomers(){
+    public int getMaxCustomers() {
         return maxCustomers;
     }
-    public double getMaxPickTime(){
+
+    public double getMaxPickTime() {
         return maxPick;
     }
-    public double getMinPickTime(){
+
+    public double getMinPickTime() {
         return minPick;
     }
-    public double getMaxPayTime(){
+
+    public double getMaxPayTime() {
         return maxPay;
     }
-    public double getMinPayTime(){
+
+    public double getMinPayTime() {
         return minPay;
     }
-    public long getSeed(){
+
+    public long getSeed() {
         return seed;
     }
 
-    public void customersQueued(int value){
-        CustomersQueued += value;
-    }
-    public int getCustomersQueued(){
-        return CustomersQueued;
+    public void customerQueued() {
+        customersQueued++;
     }
 
-    public void startQueueTime(double time){
-        queStartTime = time;
+    public int getCustomersQueued() {
+        return customersQueued;
     }
-    public void addQueueTime(double time){
-         queTime += time - queStartTime;
-    }
-    public double getQueueTime(){
-        return queTime;
-    }
-
 }
