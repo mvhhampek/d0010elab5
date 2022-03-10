@@ -18,7 +18,7 @@ public class StoreState {
 
     public CustomerFactory customerFactory;
     public CustomerQueue customerQueue;
-    private boolean simulationRunning;
+
     private boolean open;
     private int maxCustomers;
     private int customersInStore;
@@ -28,6 +28,8 @@ public class StoreState {
     private int lambda; // customers per timme
     private long seed;
     private int customersQueued = 0;
+    private double totalQueueTime;
+    private double freeCashierTime;
 
     public StoreState(int maxCheckouts, int maxCustomers, int lambda, double minPick, double maxPick, double minPay,
             double maxPay, long seed) {
@@ -44,7 +46,8 @@ public class StoreState {
         this.minPick = minPick;
         this.lambda = lambda;
         missedCostumers = 0;
-
+        totalQueueTime = 0;
+        freeCashierTime = 0;
     }
 
     public int getMissedCostumers() {
@@ -87,21 +90,8 @@ public class StoreState {
         open = false;
     }
 
-    /**
-     * Returns state of simulation
-     * 
-     * @return true if the simulation is running, false otherwise
-     */
-    public boolean getSimRunning() {
-        return simulationRunning;
-    }
 
-    /**
-     * Ends the simulation
-     */
-    public void endSimulation() {
-        simulationRunning = false;
-    }
+
 
     /**
      * 
@@ -121,8 +111,11 @@ public class StoreState {
     public double getCloseTime() {
         return closingTime;
     }
-    
-    
+
+    public int getCustomersInStore() {
+        return customersInStore;
+    }
+
     /**
      * send the current time
      * 
@@ -143,14 +136,6 @@ public class StoreState {
 
     public CustomerQueue getCustomerQueue() {
         return customerQueue;
-    }
-
-    /**
-     * Calculates total queuetime, time cashiers have been unoccupied,
-     * 
-     */
-    public void updatedTime() {
-
     }
 
     /**
@@ -211,4 +196,12 @@ public class StoreState {
     public int getCustomersQueued() {
         return customersQueued;
     }
+
+    public void increaseQueuedTime(double value){
+        totalQueueTime += value;
+    }
+    public void increaseFreeCashierTime(double value){
+        freeCashierTime += value;
+    }
+
 }
