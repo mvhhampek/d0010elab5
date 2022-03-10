@@ -30,6 +30,9 @@ public class StoreState {
     private int customersQueued = 0;
     private double totalQueueTime;
     private double freeCashierTime;
+    private boolean occupied;
+    private double timeOfFreedome;
+    private double timeOfOccupation;
 
     public StoreState(int maxCheckouts, int maxCustomers, int lambda, double minPick, double maxPick, double minPay,
             double maxPay, long seed) {
@@ -48,6 +51,9 @@ public class StoreState {
         missedCostumers = 0;
         totalQueueTime = 0;
         freeCashierTime = 0;
+        occupied = false;
+        timeOfFreedome = 0;
+        timeOfOccupation = 0;
     }
 
     public int getMissedCostumers() {
@@ -152,6 +158,10 @@ public class StoreState {
      */
     public void occupyACheckout() {
         occupiedCheckouts++;
+        if(getFreeCheckouts()==0 && !occupied){
+            occupied = true;
+            getOccupationTime();
+        }
     }
 
     /**
@@ -159,6 +169,10 @@ public class StoreState {
      */
     public void freeACheckout() {
         occupiedCheckouts--;
+        if(getFreeCheckouts()>0 && occupied){
+            occupied = false;
+            getFreeTime();
+        }
     }
 
     public int getMaxCheckouts() {
@@ -201,16 +215,19 @@ public class StoreState {
         totalQueueTime += value;
     }
 
-    public boolean occuppied() {
-        return getFreeCheckouts() == 0;
+    public void getOccupationTime(){
+        timeOfOccupation = getTime();
     }
-    public void free(){
-        return getFreeCheckouts() !=0;
+    public void getFreeTime(){
+        timeOfFreedome = getTime();
     }
 
     public void increaseFreeCashierTime(double value){
+        if(freeCashierTime == 0){
+            freeCashierTime = getTime();
+        }
 
-        freeCashierTime = freeCashierTime + (timeOffree - timeOfOcc);
+        freeCashierTime = freeCashierTime ;
     }
 
 }
