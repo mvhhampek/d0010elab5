@@ -24,4 +24,7 @@ public class CloseEvent extends Event {
 		return null;
 	}
 
+	public String getName() {
+		return "Stängning";
+	}
 }

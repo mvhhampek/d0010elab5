@@ -4,4 +4,5 @@ public abstract class Event {
 	public abstract void execute();
 	public abstract double getTime();
 	public abstract Customer getCustomer();
+	public abstract String getName();
 }

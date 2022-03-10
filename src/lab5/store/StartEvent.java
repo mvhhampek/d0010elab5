@@ -31,4 +31,9 @@ public class StartEvent extends Event {
 	public Customer getCustomer(){
 		return null;
 	}
+
+
+	public String getName() {
+		return "Start";
+	}
 }

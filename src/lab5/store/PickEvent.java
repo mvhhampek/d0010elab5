@@ -40,4 +40,8 @@ public class PickEvent extends Event {
 	public Customer getCustomer() {
 		return customer;
 	}
+
+	public String getName() {
+		return "Plock";
+	}
 }
