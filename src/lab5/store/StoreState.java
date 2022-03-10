@@ -229,5 +229,5 @@ public class StoreState {
 
         freeCashierTime = freeCashierTime ;
     }
-
+//asd
 }
