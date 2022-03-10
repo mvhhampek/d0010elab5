@@ -223,11 +223,6 @@ public class StoreState {
     }
 
     public void increaseFreeCashierTime(double value){
-        if(freeCashierTime == 0){
-            freeCashierTime = getTime();
-        }
-
-        freeCashierTime = freeCashierTime ;
+        freeCashierTime  += timeOfOccupation - timeOfFreedome;
     }
-//asd
 }
