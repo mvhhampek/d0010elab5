@@ -27,12 +27,14 @@ public class StoreState {
     private int maxCheckouts;
     private int lambda; // customers per timme
     private long seed;
-    private int customersQueued = 0;
+    private int customersQueued;
     private double totalQueueTime;
     private double freeCashierTime;
     private boolean occupied;
     private double timeOfFreedome;
     private double timeOfOccupation;
+    private int finishedCustomers;
+
 
     public StoreState(int maxCheckouts, int maxCustomers, int lambda, double minPick, double maxPick, double minPay,
             double maxPay, long seed) {
@@ -54,6 +56,8 @@ public class StoreState {
         occupied = false;
         timeOfFreedome = 0;
         timeOfOccupation = 0;
+        finishedCustomers = 0;
+        customersQueued = 0;
     }
 
     public int getMissedCostumers() {
