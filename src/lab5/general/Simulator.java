@@ -1,5 +1,7 @@
 package lab5.general;
 
+import lab5.general.State;
+import lab5.store.StoreState;
 import lab5.store.CloseEvent;
 import lab5.store.EndEvent;
 import lab5.store.StartEvent;

@@ -1,17 +1,17 @@
 package lab5.store;
 
+import lab5.general.Event;
 import lab5.general.State;
 
 import lab5.store.time.*;
 
-public class StoreState {
+public class StoreState extends State {
     private double closingTime;
     private double currentTime;
     private double minPay;
     private double maxPay;
     private double minPick;
     private double maxPick;
-
     private ExponentialRandomStream arriveTime;
     private UniformRandomStream pickTime;
     private UniformRandomStream payTime;
@@ -99,9 +99,6 @@ public class StoreState {
     public void close() {
         open = false;
     }
-
-
-
 
     /**
      * 

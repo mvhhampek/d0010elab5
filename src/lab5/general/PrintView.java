@@ -1,4 +1,4 @@
-package lab5.general;
+ package lab5.general;
 
 import java.util.Observable;
 import lab5.store.StoreState;
@@ -11,10 +11,8 @@ public class PrintView extends View {
     public PrintView(State s) {
         state = s;
         s.addObserver(this);
-        storeState = s.getStore();
     }
 
-    @Override
     public void update(Observable o, Object arg) {
         // TODO Auto-generated method stub
         printEvents();
@@ -47,6 +45,7 @@ public class PrintView extends View {
     public void results(){
         System.out.println("============000============");
     }
+}
 /*
  * a. tid,
  * b. händelsenamn,

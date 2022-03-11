@@ -17,8 +17,8 @@ public class RunSim {
 
 
         StoreState storeState = new StoreState(maxCheckouts, maxCustomers, lambda, pickMin, pickMax, payMin, payMax, seed);
-        State state = new State(storeState);
-        Simulator simulator = new Simulator(state);
+        State state = new State();
+        Simulator simulator = new Simulator(storeState);
         
         simulator.run();
     }

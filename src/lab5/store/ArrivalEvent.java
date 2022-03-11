@@ -1,35 +1,32 @@
 package lab5.store;
 
-import lab5.general.State;
 import lab5.general.Event;
 import lab5.general.EventQueue;
 
 public class ArrivalEvent extends Event {
 	private Customer customer;
-	private State state;
 	private EventQueue eventQueue;
 	private double time;
 	private StoreState storeState;
 
 	// skapar ett nytt pick event och arrivalevent
 
-	public ArrivalEvent(State state, EventQueue eventQueue, double time) {
-		this.state = state;
+	public ArrivalEvent(StoreState storeState, EventQueue eventQueue, double time) {
+		this.storeState = storeState;
 		this.eventQueue = eventQueue;
 		this.time = time;
-		storeState = state.getStore();
 	}
 
 	public void execute() {
 		if (storeState.isOpen() && storeState.space()) {
-			time += storeState.getArrivalTime();
-			eventQueue.push(new PickEvent(state, eventQueue, time + storeState.getPickTime(),
+			//time += storeState.getArrivalTime();
+			eventQueue.push(new PickEvent(storeState, eventQueue, time + storeState.getPickTime(),
 					storeState.customerFactory.createCustomer()));
-			eventQueue.push(new ArrivalEvent(state, eventQueue, time + storeState.getArrivalTime()));
+			eventQueue.push(new ArrivalEvent(storeState, eventQueue, time + storeState.getArrivalTime()));
 		}
 		if (storeState.isOpen() && !storeState.space()) {
 			storeState.missedCustomer();
-			eventQueue.push(new ArrivalEvent(state, eventQueue, time + storeState.getArrivalTime()));
+			eventQueue.push(new ArrivalEvent(storeState, eventQueue, time + storeState.getArrivalTime()));
 		}
 		if (!storeState.isOpen()) {
 			// inte missad kund

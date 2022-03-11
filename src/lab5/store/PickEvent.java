@@ -1,33 +1,27 @@
 package lab5.store;
 
 import lab5.general.Event;
-import lab5.general.State;
 import lab5.general.EventQueue;
 
 public class PickEvent extends Event {
 	private Customer customer;
-	private State state;
 	private EventQueue eventQueue;
 	private double time;
 	private StoreState storeState;
 	private CustomerQueue customerQueue;
 
-	public PickEvent(State state, EventQueue eventQueue, double time, Customer customer) {
-		this.state = state;
+	public PickEvent(StoreState storeState, EventQueue eventQueue, double time, Customer customer) {
 		this.eventQueue = eventQueue;
 		this.time = time;
 		this.customer = customer;
-		storeState = state.getStore();
+		this.storeState = storeState;
 		customerQueue = storeState.getCustomerQueue();
 	}
 
 	public void execute() {
 		if (storeState.getFreeCheckouts() > 0) {
 			storeState.occupyACheckout();
-			if (storeState.getFreeCheckouts() != 0){
-				
-			}
-			eventQueue.push(new PayEvent(state, eventQueue, time + storeState.getPayTime(), customer));			
+			eventQueue.push(new PayEvent(storeState, eventQueue, time + storeState.getPayTime(), customer));			
 		} else {
 			customerQueue.add(customer);
 		}
