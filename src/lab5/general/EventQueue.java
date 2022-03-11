@@ -1,4 +1,5 @@
 package lab5.general;
+
 public class EventQueue {
 
     private Event[] queue;
@@ -14,7 +15,7 @@ public class EventQueue {
      */
     public void push(Event e){
         int n = size();
-        Event[] temp = new Event[n + 1];       
+        Event[] temp = new Event[n + 1];
         for (int i = 0; i < n; i++){
             temp[i] = queue[i];
         }

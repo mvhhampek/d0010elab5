@@ -65,4 +65,13 @@ public class CustomerQueue {
 		return queue.length;
 	}
 
+	public String toString() {
+		String s = "[";
+		for (int i = 0; i < size(); i++) {
+			s += queue[i].getId();
+			s += i != size() - 1 ? ", " : "]";
+		}
+		return s;
+	}
+
 }

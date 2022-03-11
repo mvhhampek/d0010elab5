@@ -34,7 +34,7 @@ public class StoreState extends State {
     private double timeOfFreedome;
     private double timeOfOccupation;
     private int finishedCustomers;
-
+    private Event currentEvent;
 
     public StoreState(int maxCheckouts, int maxCustomers, int lambda, double minPick, double maxPick, double minPay,
             double maxPay, long seed) {
@@ -66,6 +66,27 @@ public class StoreState extends State {
 
     public int getLambda() {
         return lambda;
+    }
+
+    public void setCurrentEvent(Event e) {
+        currentEvent = e;
+    }
+
+    public Event getCurrentEvent() {
+        return currentEvent;
+    }
+
+    public void setCurrentTime(double value) {
+        currentTime = value;
+    }
+
+    /**
+     * send the current time
+     * 
+     * @return the current time
+     */
+    public double getCurrentTime() {
+        return currentTime;
     }
 
     /**
@@ -124,15 +145,6 @@ public class StoreState extends State {
     }
 
     /**
-     * send the current time
-     * 
-     * @return the current time
-     */
-    public double getTime() {
-        return currentTime;
-    }
-
-    /**
      * Updates the time.
      * 
      * @param timeElapsed how much time has passed
@@ -159,7 +171,7 @@ public class StoreState extends State {
      */
     public void occupyACheckout() {
         occupiedCheckouts++;
-        if(getFreeCheckouts()==0 && !occupied){
+        if (getFreeCheckouts() == 0 && !occupied) {
             occupied = true;
             getOccupationTime();
         }
@@ -170,7 +182,7 @@ public class StoreState extends State {
      */
     public void freeACheckout() {
         occupiedCheckouts--;
-        if(getFreeCheckouts()>0 && occupied){
+        if (getFreeCheckouts() > 0 && occupied) {
             occupied = false;
             getFreeTime();
         }
@@ -212,18 +224,19 @@ public class StoreState extends State {
         return customersQueued;
     }
 
-    public void increaseQueuedTime(double value){
+    public void increaseQueuedTime(double value) {
         totalQueueTime += value;
     }
 
-    public void getOccupationTime(){
+    public void getOccupationTime() {
         timeOfOccupation = getTime();
     }
-    public void getFreeTime(){
+
+    public void getFreeTime() {
         timeOfFreedome = getTime();
     }
 
-    public void increaseFreeCashierTime(double value){
-        freeCashierTime  += timeOfOccupation - timeOfFreedome;
+    public void increaseFreeCashierTime(double value) {
+        freeCashierTime += timeOfOccupation - timeOfFreedome;
     }
 }

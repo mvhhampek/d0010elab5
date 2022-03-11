@@ -17,7 +17,6 @@ public class Simulator {
 
     public void run() {
         eventQueue.push(new StartEvent(state, eventQueue));
-        eventQueue.push(new CloseEvent(state));
         eventQueue.push(new EndEvent(state)); //tiden 999
         while (state.getSimRunning()) {
             eventQueue.pop().execute();
