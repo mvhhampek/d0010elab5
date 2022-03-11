@@ -223,20 +223,4 @@ public class StoreState extends State {
     public int getCustomersQueued() {
         return customersQueued;
     }
-
-    public void increaseQueuedTime(double value) {
-        totalQueueTime += value;
-    }
-
-    public void getOccupationTime() {
-        timeOfOccupation = getTime();
-    }
-
-    public void getFreeTime() {
-        timeOfFreedome = getTime();
-    }
-
-    public void increaseFreeCashierTime(double value) {
-        freeCashierTime += timeOfOccupation - timeOfFreedome;
-    }
 }
