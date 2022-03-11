@@ -2,21 +2,27 @@ package lab5.store;
 
 import lab5.general.Event;
 import lab5.general.EventQueue;
+import lab5.general.State;
 
 public class StartEvent extends Event {
 	private EventQueue eventQueue;
 	private double time;
 	private StoreState storeState;
+	private State state;
 
-	public StartEvent(StoreState storeState, EventQueue eventQueue) {
+	public StartEvent(StoreState storeState,State state, EventQueue eventQueue) {
 		this.eventQueue = eventQueue;
 		this.time = 0;
 		this.storeState = storeState;
+		this.state = state;
 	}
 
 	public void execute() {
-		eventQueue.push(new ArrivalEvent(storeState, eventQueue, time + storeState.getArrivalTime()));
-		eventQueue.push(new CloseEvent(storeState));
+		storeState.open();
+		storeState.setCurrentEvent(this);
+		state.notifyObs();
+		eventQueue.push(new CloseEvent(storeState,state));
+		eventQueue.push(new ArrivalEvent(storeState,state, eventQueue, time + storeState.getArrivalTime()));
 	}
 
 	public double getTime() {

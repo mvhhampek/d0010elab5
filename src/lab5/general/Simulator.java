@@ -11,7 +11,10 @@ public class Simulator {
 
     public void run() {
         while (state.getSimRunning()) {
-            eventQueue.pop().execute();
+            Event currentEvent = eventQueue.pop();
+            
+            //System.out.println(eventQueue.size()+ currentEvent.getClass().getSimpleName());
+            currentEvent.execute();
         }
     }
 }

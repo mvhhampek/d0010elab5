@@ -71,6 +71,7 @@ public class CustomerQueue {
 			s += queue[i].getId();
 			s += i != size() - 1 ? ", " : "]";
 		}
+		s += size() == 0 ? "]" : "";
 		return s;
 	}
 

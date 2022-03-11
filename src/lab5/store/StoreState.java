@@ -1,5 +1,7 @@
 package lab5.store;
 
+import java.util.Currency;
+
 import lab5.general.Event;
 import lab5.general.State;
 
@@ -7,6 +9,7 @@ import lab5.store.time.*;
 
 public class StoreState extends State {
     private double closingTime;
+    private double lastTime;
     private double currentTime;
     private double minPay;
     private double maxPay;
@@ -29,13 +32,10 @@ public class StoreState extends State {
     private long seed;
     private int customersQueued;
     private double totalQueueTime;
-    private double freeCashierTime;
-    private boolean occupied;
-    private double timeOfFreedome;
-    private double timeOfOccupation;
-    private int finishedCustomers;
+    private double freeCheckoutTime;
     private Event currentEvent;
     private Customer currentCustomer;
+    private int payedCustomers;
 
     public StoreState(int maxCheckouts, int maxCustomers, int lambda, double minPick, double maxPick, double minPay,
             double maxPay, long seed) {
@@ -53,15 +53,22 @@ public class StoreState extends State {
         this.lambda = lambda;
         missedCostumers = 0;
         totalQueueTime = 0;
-        freeCashierTime = 0;
-        occupied = false;
-        timeOfFreedome = 0;
-        timeOfOccupation = 0;
-        finishedCustomers = 0;
+        freeCheckoutTime = 0;
         customersQueued = 0;
+        customerFactory = new CustomerFactory();
+        customerQueue = new CustomerQueue();
+        payedCustomers = 0;
     }
 
-    public Customer getCurrentCustomer(){
+    public void increasePayedCustomers() {
+        payedCustomers++;
+    }
+
+    public int getPayedCustomers() {
+        return payedCustomers;
+    }
+
+    public Customer getCurrentCustomer() {
         return currentCustomer;
     }
 
@@ -126,6 +133,10 @@ public class StoreState extends State {
         open = false;
     }
 
+    public void open() {
+        open = true;
+    }
+
     /**
      * 
      * @return true if there is place for more customers in the store
@@ -149,15 +160,6 @@ public class StoreState extends State {
         return customersInStore;
     }
 
-    /**
-     * Updates the time.
-     * 
-     * @param timeElapsed how much time has passed
-     */
-    public void updateTime(double timeElapsed) {
-        currentTime += timeElapsed;
-    }
-
     public CustomerQueue getCustomerQueue() {
         return customerQueue;
     }
@@ -176,10 +178,6 @@ public class StoreState extends State {
      */
     public void occupyACheckout() {
         occupiedCheckouts++;
-        if (getFreeCheckouts() == 0 && !occupied) {
-            occupied = true;
-            getOccupationTime();
-        }
     }
 
     /**
@@ -187,10 +185,6 @@ public class StoreState extends State {
      */
     public void freeACheckout() {
         occupiedCheckouts--;
-        if (getFreeCheckouts() > 0 && occupied) {
-            occupied = false;
-            getFreeTime();
-        }
     }
 
     public int getMaxCheckouts() {
@@ -228,4 +222,60 @@ public class StoreState extends State {
     public int getCustomersQueued() {
         return customersQueued;
     }
+
+    public void setCurrentCustomer(Customer c) {
+        currentCustomer = c;
+    }
+
+    public void increaseCustomersInStore() {
+        customersInStore++;
+    }
+
+    public void increaseFreeCheckoutTime(double value) {
+        freeCheckoutTime += value;
+    }
+
+    public void increaseTotalQueueTime(double value) {
+        totalQueueTime += value;
+    }
+
+    public double getFreeCheckoutTime() {
+        return freeCheckoutTime;
+    }
+
+    public double getTotalQueueTime() {
+        return totalQueueTime;
+    }
+
+    public void updateTime(Event nextEvent) {
+        lastTime = currentEvent.getTime();
+        currentTime = nextEvent.getTime();
+
+        currentEvent = nextEvent;
+
+        if (nextEvent.getName() != "Stopp" && !(nextEvent.getName() == "Ankomst" && !isOpen())) {
+            increaseFreeCheckoutTime((currentTime - lastTime) * getFreeCheckouts());
+            increaseTotalQueueTime((currentTime - lastTime) * customerQueue.size());
+        }
+    }
 }
+
+/*
+ * this.lastTime = this.currentTime;
+ * this.currentTime = tEvent.getTime();
+ * if (tEvent.getClass() == StopEvent.class) {
+ * setCashierFreeTime(getCashierFreeTime());
+ * } else if (tEvent.getClass() == ArrivalEvent.class && !isStoreOpen()) {
+ * setCashierFreeTime(getCashierFreeTime());
+ * } else {
+ * setCashierFreeTime(getCashierFreeTime()
+ * + (getTimeBetweenE() * (getCashiers() - getActiveCashiers())));
+ * setCustomerQueueTime(
+ * getCustomerQueueTime() + (getTimeBetweenE() * getCustomersInQueue()));
+ * 
+ * if (tEvent.getClass() == PayEvent.class) {
+ * setLastPay(tEvent.getTime());
+ * }
+ * this.currentEvent = tEvent;
+ * this.currentCustomer = getCurrentCustomer();
+ */

@@ -22,10 +22,10 @@ public class RunSim {
         StoreState storeState = new StoreState(maxCheckouts, maxCustomers, lambda, pickMin, pickMax, payMin, payMax, seed);
         State state = new State();
         EventQueue eventQueue = new EventQueue();
-        eventQueue.push(new StartEvent(storeState, eventQueue));
-        eventQueue.push(new EndEvent(storeState)); //tiden 999
+        eventQueue.push(new StartEvent(storeState,state, eventQueue));
+        eventQueue.push(new EndEvent(storeState,state)); //tiden 999
         Simulator simulator = new Simulator(state, eventQueue);
-        PrintView printView = new PrintView(storeState);
+        PrintView printView = new PrintView(state, storeState);
         simulator.run();
     }
 }

@@ -2,34 +2,38 @@ package lab5.store;
 
 import lab5.general.Event;
 import lab5.general.EventQueue;
+import lab5.general.State;
 
 public class ArrivalEvent extends Event {
+	private State state;
 	private Customer customer;
 	private EventQueue eventQueue;
 	private double time;
 	private StoreState storeState;
 
-	// skapar ett nytt pick event och arrivalevent
-
-	public ArrivalEvent(StoreState storeState, EventQueue eventQueue, double time) {
+	public ArrivalEvent(StoreState storeState, State state, EventQueue eventQueue, double time) {
+		this.state = state;
 		this.storeState = storeState;
 		this.eventQueue = eventQueue;
 		this.time = time;
+		customer = storeState.customerFactory.createCustomer();
 	}
 
 	public void execute() {
-		if (storeState.isOpen() && storeState.space()) {
-			//time += storeState.getArrivalTime();
-			eventQueue.push(new PickEvent(storeState, eventQueue, time + storeState.getPickTime(),
-					storeState.customerFactory.createCustomer()));
-			eventQueue.push(new ArrivalEvent(storeState, eventQueue, time + storeState.getArrivalTime()));
-		}
-		if (storeState.isOpen() && !storeState.space()) {
-			storeState.missedCustomer();
-			eventQueue.push(new ArrivalEvent(storeState, eventQueue, time + storeState.getArrivalTime()));
-		}
-		if (!storeState.isOpen()) {
-			// inte missad kund
+		storeState.updateTime(this);
+		storeState.setCurrentEvent(this);
+		storeState.setCurrentCustomer(this.customer);
+		state.notifyObs();
+		if (storeState.isOpen()) {
+			if (storeState.space()) {
+				eventQueue.push(new PickEvent(storeState, state, eventQueue, time + storeState.getPickTime(),
+						customer));
+				eventQueue.push(new ArrivalEvent(storeState, state, eventQueue, time + storeState.getArrivalTime()));
+				storeState.increaseCustomersInStore();
+			} else {
+				storeState.missedCustomer();
+				eventQueue.push(new ArrivalEvent(storeState, state, eventQueue, time + storeState.getArrivalTime()));
+			}
 		}
 	}
 

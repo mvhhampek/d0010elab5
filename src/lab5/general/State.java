@@ -23,4 +23,9 @@ public class State extends Observable {
     public boolean getSimRunning() {
         return simulationRunning;
     }
+
+    public void notifyObs(){
+        setChanged();
+        notifyObservers();
+    }
 }
