@@ -35,6 +35,7 @@ public class StoreState extends State {
     private double timeOfOccupation;
     private int finishedCustomers;
     private Event currentEvent;
+    private Customer currentCustomer;
 
     public StoreState(int maxCheckouts, int maxCustomers, int lambda, double minPick, double maxPick, double minPay,
             double maxPay, long seed) {
@@ -58,6 +59,10 @@ public class StoreState extends State {
         timeOfOccupation = 0;
         finishedCustomers = 0;
         customersQueued = 0;
+    }
+
+    public Customer getCurrentCustomer(){
+        return currentCustomer;
     }
 
     public int getMissedCostumers() {

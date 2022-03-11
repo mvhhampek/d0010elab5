@@ -1,21 +1,20 @@
- package lab5.general;
+package lab5.general;
 
 import java.util.Observable;
 import lab5.store.StoreState;
 
 @SuppressWarnings("deprecation")
 public class PrintView extends View {
-    private State state;
     private StoreState storeState;
-
-    public PrintView(State s) {
-        state = s;
-        s.addObserver(this);
+    private State state;
+    public PrintView(State state, StoreState storeState) {
+        this.storeState = storeState;
+        this.state = state;
+        state.addObserver(this);
     }
 
     public void update(Observable o, Object arg) {
-        // TODO Auto-generated method stub
-        printEvents();
+        printEvents(storeState.getCurrentEvent());
 
     }
 
@@ -37,7 +36,7 @@ public class PrintView extends View {
 
     public void printEvents(Event e) {
         String open = storeState.isOpen() ? "Ö" : "S";
-        System.out.println(storeState.getTime() + " " + e.getName() + " " + e.getCustomer().getId() +
+        System.out.println(storeState.getCurrentTime() + " " + e.getName() + " " + storeState.getCurrentCustomer().getId() +
                 " " + open + " " + storeState.getFreeCheckouts() + " " + 0 + " " + storeState.getCustomersInStore()
                 + " " + 0 + " " + storeState.getMissedCostumers() + " " + storeState.getCustomersQueued() + " " + 0 + " " + 0);
     }

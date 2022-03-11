@@ -13,10 +13,10 @@ public class Optimize {
 
     public StoreState metod1(int kassor){
         StoreState storeState = new StoreState(kassor,15, 4, 0.5, 1.00, 0.5, 1.0, 1234);
-        View view = new View();
-        State state = new State(storeState, view);
-        Simulator simulator = new Simulator(state);
-        simulator.run();
+        //View view = new View();
+        //State state = new State(storeState, view);
+        //Simulator simulator = new Simulator(state);
+        //simulator.run();
 
         return storeState;
         }
