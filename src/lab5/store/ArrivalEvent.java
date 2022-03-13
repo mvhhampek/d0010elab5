@@ -32,7 +32,7 @@ public class ArrivalEvent extends Event {
 	}
 
 	/**
-	 * Creates future arrivalevent and new pickevent if the store is open and there is room for more customers,
+	 * Creates new pickevent if the store is open and there is room for more customers,
 	 * otherwise notes that a customer has been missed and creates a future arrivalevent
 	 */
 	public void execute() {
