@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7810aef3-f396-4df4-8d6c-81f5a6bf8506" name="Changes" comment="CloseEvent">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lab5/store/PayEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lab5/store/PayEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lab5/store/PickEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lab5/store/PickEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lab5/store/StoreState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lab5/store/StoreState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lab5/Optimize.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lab5/Optimize.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,10 +38,19 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="jdk.selected.JAVA_MODULE" value="openjdk-17" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Run" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="lab5.RunSim" />
+      <module name="lab5" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -57,7 +64,10 @@
       <workItem from="1646669458500" duration="1340000" />
       <workItem from="1646753873578" duration="4000" />
       <workItem from="1646753899052" duration="4898000" />
-      <workItem from="1646839424947" duration="8699000" />
+      <workItem from="1646839424947" duration="8723000" />
+      <workItem from="1647185698836" duration="286000" />
+      <workItem from="1647186001639" duration="559000" />
+      <workItem from="1647190368645" duration="35000" />
     </task>
     <task id="LOCAL-00001" summary="CloseEvent">
       <created>1646754879794</created>
