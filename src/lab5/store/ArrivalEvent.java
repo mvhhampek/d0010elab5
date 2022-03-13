@@ -12,6 +12,7 @@ public class ArrivalEvent extends Event {
 	private StoreState storeState;
 
 	public ArrivalEvent(StoreState storeState, State state, EventQueue eventQueue, double time) {
+		super(state, eventQueue, time);
 		this.state = state;
 		this.storeState = storeState;
 		this.eventQueue = eventQueue;
@@ -21,8 +22,7 @@ public class ArrivalEvent extends Event {
 
 	public void execute() {
 		storeState.updateTime(this);
-		storeState.setCurrentEvent(this);
-		storeState.setCurrentCustomer(this.customer);
+		storeState.setCurrentCustomer(customer);
 		state.notifyObs();
 		if (storeState.isOpen()) {
 			if (storeState.space()) {

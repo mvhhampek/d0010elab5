@@ -6,11 +6,9 @@ import lab5.store.StoreState;
 @SuppressWarnings("deprecation")
 public class PrintView extends View {
     private StoreState storeState;
-    private State state;
 
     public PrintView(State state, StoreState storeState) {
         this.storeState = storeState;
-        this.state = state;
         state.addObserver(this);
     }
 
@@ -49,32 +47,32 @@ public class PrintView extends View {
                         : Integer.toString(storeState.getCurrentCustomer().getId());
                 String open = storeState.isOpen() ? "Ö" : "S";
                 System.out.println(
-                        // a. Time
                         String.format("%.2f", e.getTime()) + "\t" +
-                        // b. Event name
                                 e.getName() + "\t\t" +
-                                // c. Customer ID
                                 customerId + "\t" +
-                                // d. Closed or open
                                 open + "\t" +
-                                // e. #Free checkouts
                                 storeState.getFreeCheckouts() + "\t" +
-                                // f. Sum time of free checkouts
                                 String.format("%.2f", storeState.getFreeCheckoutTime()) + "\t" +
-                                // g. #Customers in store
                                 storeState.getCustomersInStore() + "\t" +
-                                // h. #Payed customers
                                 storeState.getPayedCustomers() + "\t" +
-                                // i. #Missed customers
                                 storeState.getMissedCostumers() + "\t" +
-                                // j. #Customer who have queued
                                 storeState.getCustomersQueued() + "\t" +
-                                // k. Sum time customers have queued
                                 String.format("%.2f", storeState.getTotalQueueTime()) + "\t" +
-                                // l. Checkoutsqueue length
                                 storeState.getCustomerQueue().size() + "\t" +
-                                // m. Checkoutqueue with customer ID
                                 storeState.getCustomerQueue().toString());
+                // a. Time
+                // b. Event name
+                // c. Customer ID
+                // d. Closed or open
+                // e. #Free checkouts
+                // f. Sum time of free checkouts
+                // g. #Customers in store
+                // h. #Payed customers
+                // i. #Missed customers
+                // j. #Customer who have queued
+                // k. Sum time customers have queued
+                // l. Checkoutsqueue length
+                // m. Checkoutqueue with customer ID
                 break;
         }
     }
@@ -83,29 +81,3 @@ public class PrintView extends View {
         System.out.println("============000============");
     }
 }
-/*
- * a. tid,
- * b. händelsenamn,
- * c. kundnummer,
- * d. om det är öppet eller stängt,
- * e. antal lediga kassor,
- * f. summa tid kassor varit lediga,
- * g. antal kunder inne i snabbköpet,
- * h. antal kunder som handlat (dvs kommit in, plockat, betalat och lämnat),
- * i. antal missade kunder,
- * j. antal kunder som köat,
- * k. summa tid kunder stått i kundkön,
- * l. kassaköns längd och
- * m. hela kassakön, där det för varje par av kunder gäller att den som står
- * till
- * vänster har stått längre i kön än den som står till hö
- * 
- * 
- * 
- * e.getName() + " " + 0 + " " + customerId +
- * " " + open + " " + storeState.getFreeCheckouts() + " " + 0 + " "
- * + storeState.getCustomersInStore()
- * + " " + 0 + " " + storeState.getMissedCostumers() + " " +
- * storeState.getCustomersQueued() + " "
- * + 0 + " " + storeState.getCustomerQueue().toString())
- */

@@ -1,12 +1,5 @@
 package lab5;
 
-import lab5.general.EventQueue;
-import lab5.general.Simulator;
-import lab5.general.State;
-import lab5.general.View;
-import lab5.store.CloseEvent;
-import lab5.store.EndEvent;
-import lab5.store.StartEvent;
 import lab5.store.StoreState;
 
 public class Optimize {

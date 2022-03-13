@@ -13,6 +13,7 @@ public class PickEvent extends Event {
 	private CustomerQueue customerQueue;
 
 	public PickEvent(StoreState storeState,State state, EventQueue eventQueue, double time, Customer customer) {
+		super(state, eventQueue, time);
 		this.state = state;
 		this.eventQueue = eventQueue;
 		this.time = time;
@@ -23,8 +24,7 @@ public class PickEvent extends Event {
 
 	public void execute() {
 		storeState.updateTime(this);
-		storeState.setCurrentEvent(this);
-		storeState.setCurrentCustomer(this.customer);
+		storeState.setCurrentCustomer(customer);
 		state.notifyObs();
 		if (storeState.getFreeCheckouts() > 0) {
 			storeState.occupyACheckout();

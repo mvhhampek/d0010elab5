@@ -6,7 +6,7 @@ import java.util.Observable;
 public class State extends Observable {
 
     private boolean simulationRunning;
-    public State(){
+    public State() {
         simulationRunning = true;
     }
     /**

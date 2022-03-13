@@ -12,23 +12,23 @@ public class PayEvent extends Event {
 	private CustomerQueue queue;
 	private State state;
 
-	public PayEvent(StoreState storeState,State state, EventQueue eventQueue, double time, Customer customer) {
+	public PayEvent(StoreState storeState, State state, EventQueue eventQueue, double time, Customer customer) {
+		super(state, eventQueue, time);
 		this.state = state;
-		this.customer = customer;
 		this.eventQueue = eventQueue;
 		this.time = time;
 		this.storeState = storeState;
+		this.customer = customer;
 		queue = storeState.getCustomerQueue();
 	}
 
 	public void execute() {
 		storeState.updateTime(this);
-		storeState.setCurrentEvent(this);
-		storeState.setCurrentCustomer(this.customer);
+		storeState.setCurrentCustomer(customer);
 		state.notifyObs();
 		storeState.decreaseCustomersInStore();
 		if (!queue.isEmpty()) {
-			eventQueue.push(new PayEvent(storeState,state, eventQueue, time + storeState.getPayTime(), queue.pop()));
+			eventQueue.push(new PayEvent(storeState, state, eventQueue, time + storeState.getPayTime(), queue.pop()));
 			storeState.increasePayedCustomers();
 		} else {
 			storeState.freeACheckout();

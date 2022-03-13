@@ -11,6 +11,7 @@ public class StartEvent extends Event {
 	private State state;
 
 	public StartEvent(StoreState storeState,State state, EventQueue eventQueue) {
+		super(state, eventQueue);
 		this.eventQueue = eventQueue;
 		this.time = 0;
 		this.storeState = storeState;
@@ -22,7 +23,7 @@ public class StartEvent extends Event {
 		storeState.setCurrentEvent(this);
 		storeState.updateTime(this);
 		state.notifyObs();
-		eventQueue.push(new CloseEvent(storeState,state));
+		eventQueue.push(new CloseEvent(storeState,state, eventQueue));
 		eventQueue.push(new ArrivalEvent(storeState,state, eventQueue, time + storeState.getArrivalTime()));
 	}
 

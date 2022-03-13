@@ -1,14 +1,16 @@
 package lab5.store;
 
 import lab5.general.State;
+import lab5.general.EventQueue;
+import lab5.general.GeneralEndEvent;
 
-import lab5.general.Event;
-
-public class EndEvent extends Event  {
+public class EndEvent extends GeneralEndEvent {
 	private StoreState storeState;
 	private State state;
-	public EndEvent(StoreState storeState, State state){
-		this.state=state;
+
+	public EndEvent(StoreState storeState, State state, EventQueue eventQueue) {
+		super(state, eventQueue);
+		this.state = state;
 		this.storeState = storeState;
 	}
 
@@ -25,4 +27,5 @@ public class EndEvent extends Event  {
 	public String getName() {
 		return "Stopp";
 	}
+
 }

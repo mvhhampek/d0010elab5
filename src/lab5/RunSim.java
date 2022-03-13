@@ -35,7 +35,7 @@ public class RunSim {
         State state = new State();
         EventQueue eventQueue = new EventQueue();
         eventQueue.push(new StartEvent(storeState,state, eventQueue));
-        eventQueue.push(new EndEvent(storeState,state)); //tiden 999
+        eventQueue.push(new EndEvent(storeState,state, eventQueue)); //tiden 999
         Simulator simulator = new Simulator(state, eventQueue);
         new PrintView(state, storeState);
         simulator.run();

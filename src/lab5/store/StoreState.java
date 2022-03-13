@@ -256,23 +256,3 @@ public class StoreState extends State {
         }
     }
 }
-
-/*
- * this.lastTime = this.currentTime;
- * this.currentTime = tEvent.getTime();
- * if (tEvent.getClass() == StopEvent.class) {
- * setCashierFreeTime(getCashierFreeTime());
- * } else if (tEvent.getClass() == ArrivalEvent.class && !isStoreOpen()) {
- * setCashierFreeTime(getCashierFreeTime());
- * } else {
- * setCashierFreeTime(getCashierFreeTime()
- * + (getTimeBetweenE() * (getCashiers() - getActiveCashiers())));
- * setCustomerQueueTime(
- * getCustomerQueueTime() + (getTimeBetweenE() * getCustomersInQueue()));
- * 
- * if (tEvent.getClass() == PayEvent.class) {
- * setLastPay(tEvent.getTime());
- * }
- * this.currentEvent = tEvent;
- * this.currentCustomer = getCurrentCustomer();
- */
