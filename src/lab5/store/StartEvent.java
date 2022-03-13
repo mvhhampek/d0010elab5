@@ -20,6 +20,7 @@ public class StartEvent extends Event {
 	public void execute() {
 		storeState.open();
 		storeState.setCurrentEvent(this);
+		storeState.updateTime(this);
 		state.notifyObs();
 		eventQueue.push(new CloseEvent(storeState,state));
 		eventQueue.push(new ArrivalEvent(storeState,state, eventQueue, time + storeState.getArrivalTime()));

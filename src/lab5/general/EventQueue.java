@@ -39,7 +39,7 @@ public class EventQueue {
             }
         } 
     }
-
+    
     /**
      * Removes and returns the next element in queue
      */

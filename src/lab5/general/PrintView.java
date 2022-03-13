@@ -38,22 +38,19 @@ public class PrintView extends View {
         switch (e.getName()) {
             case "Start":
                 printParameters();
-                System.out.println(e.getTime() + "\t" + e.getName());
+                System.out.println(String.format("%.2f", e.getTime()) + "\t" + e.getName());
                 break;
             case "Stopp":
-                System.out.println(e.getTime() + "\t" + e.getName());
+                System.out.println(String.format("%.2f", e.getTime()) + "\t" + e.getName());
                 printResults();
                 break;
             default:
                 String customerId = e.getName() == "Stäng" ? "---"
                         : Integer.toString(storeState.getCurrentCustomer().getId());
-                String time = String.format("%.2f", e.getTime());
                 String open = storeState.isOpen() ? "Ö" : "S";
-                String cTime = String.format("%.2f", storeState.getFreeCheckoutTime());
-                String qTime = String.format("%.2f", storeState.getTotalQueueTime());
                 System.out.println(
                         // a. Time
-                        time + "\t" +
+                        String.format("%.2f", e.getTime()) + "\t" +
                         // b. Event name
                                 e.getName() + "\t\t" +
                                 // c. Customer ID
@@ -63,7 +60,7 @@ public class PrintView extends View {
                                 // e. #Free checkouts
                                 storeState.getFreeCheckouts() + "\t" +
                                 // f. Sum time of free checkouts
-                                cTime + "\t" +
+                                String.format("%.2f", storeState.getFreeCheckoutTime()) + "\t" +
                                 // g. #Customers in store
                                 storeState.getCustomersInStore() + "\t" +
                                 // h. #Payed customers
@@ -73,7 +70,7 @@ public class PrintView extends View {
                                 // j. #Customer who have queued
                                 storeState.getCustomersQueued() + "\t" +
                                 // k. Sum time customers have queued
-                                qTime + "\t" +
+                                String.format("%.2f", storeState.getTotalQueueTime()) + "\t" +
                                 // l. Checkoutsqueue length
                                 storeState.getCustomerQueue().size() + "\t" +
                                 // m. Checkoutqueue with customer ID

@@ -9,7 +9,7 @@ import lab5.store.StoreState;
 
 public class RunSim {
     public static void main(String[] args){
-        
+        /*
         int maxCheckouts = 2;
         int maxCustomers = 5;
         int lambda = 1;
@@ -18,14 +18,26 @@ public class RunSim {
         double payMin = 2.0;
         double payMax = 3.0;
         long seed = 1234;
+        double closingTime = 10.0;
+        */
         
-        StoreState storeState = new StoreState(maxCheckouts, maxCustomers, lambda, pickMin, pickMax, payMin, payMax, seed);
+        int maxCheckouts = 2;
+        int maxCustomers = 7;
+        int lambda = 3;
+        double pickMin = 0.6;
+        double pickMax = 0.9;
+        double payMin = 0.35;
+        double payMax = 0.6;
+        long seed = 13;
+        double closingTime = 8.0;
+        
+        StoreState storeState = new StoreState(maxCheckouts, maxCustomers, lambda, pickMin, pickMax, payMin, payMax, seed, closingTime);
         State state = new State();
         EventQueue eventQueue = new EventQueue();
         eventQueue.push(new StartEvent(storeState,state, eventQueue));
         eventQueue.push(new EndEvent(storeState,state)); //tiden 999
         Simulator simulator = new Simulator(state, eventQueue);
-        PrintView printView = new PrintView(state, storeState);
+        new PrintView(state, storeState);
         simulator.run();
     }
 }

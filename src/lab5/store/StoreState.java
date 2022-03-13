@@ -1,10 +1,7 @@
 package lab5.store;
 
-import java.util.Currency;
-
 import lab5.general.Event;
 import lab5.general.State;
-
 import lab5.store.time.*;
 
 public class StoreState extends State {
@@ -38,11 +35,11 @@ public class StoreState extends State {
     private int payedCustomers;
 
     public StoreState(int maxCheckouts, int maxCustomers, int lambda, double minPick, double maxPick, double minPay,
-            double maxPay, long seed) {
+            double maxPay, long seed, double closingTime) {
         arriveTime = new ExponentialRandomStream(lambda, seed);
         pickTime = new UniformRandomStream(minPick, maxPick, seed);
         payTime = new UniformRandomStream(minPay, maxPay, seed);
-        closingTime = 10.0; // denna får man bestämma själv, körexempel 1 har 10.0, 2 har 8.0
+        this.closingTime = closingTime; // denna får man bestämma själv, körexempel 1 har 10.0, 2 har 8.0
         this.maxCheckouts = maxCheckouts;
         this.maxCustomers = maxCustomers;
         this.seed = seed;

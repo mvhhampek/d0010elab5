@@ -26,10 +26,9 @@ public class ArrivalEvent extends Event {
 		state.notifyObs();
 		if (storeState.isOpen()) {
 			if (storeState.space()) {
-				eventQueue.push(new PickEvent(storeState, state, eventQueue, time + storeState.getPickTime(),
-						customer));
-				eventQueue.push(new ArrivalEvent(storeState, state, eventQueue, time + storeState.getArrivalTime()));
 				storeState.increaseCustomersInStore();
+				eventQueue.push(new PickEvent(storeState, state, eventQueue, time + storeState.getPickTime(), customer));
+				eventQueue.push(new ArrivalEvent(storeState, state, eventQueue, time + storeState.getArrivalTime()));
 			} else {
 				storeState.missedCustomer();
 				eventQueue.push(new ArrivalEvent(storeState, state, eventQueue, time + storeState.getArrivalTime()));
