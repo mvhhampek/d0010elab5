@@ -1,7 +1,10 @@
-package lab5.general;
+package lab5.store;
 
 import java.util.Observable;
-import lab5.store.StoreState;
+
+import lab5.general.Event;
+import lab5.general.State;
+import lab5.general.View;
 
 @SuppressWarnings("deprecation")
 public class PrintView extends View {
@@ -27,7 +30,7 @@ public class PrintView extends View {
                 "Betaltider, [K_min..K_max]: " + "[" + storeState.getMinPayTime() + ".." + storeState.getMaxPayTime()
                 + "]\n" +
                 "Frö, f....................: " + storeState.getSeed() + "\n" +
-                "FÖRLOPP\n" + "=======\n\n" +
+                "\nFÖRLOPP\n" + "=======\n" +
                 "Tid\tHändelse\tKund\t?\tled\tledT\tI\t$\t:-(\tköat\tköT\tköar\t[Kassakö..]");
 
     }
