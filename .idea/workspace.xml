@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7810aef3-f396-4df4-8d6c-81f5a6bf8506" name="Changes" comment="CloseEvent">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lab5/Optimize.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lab5/Optimize.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
