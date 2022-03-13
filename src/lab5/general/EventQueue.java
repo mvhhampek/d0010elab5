@@ -1,9 +1,17 @@
 package lab5.general;
 
+/**
+ * 
+ * @author Hampus Kämppi, Gustav Edner, Jonathan Junel, Linus Karlsson
+ *
+ */
 public class EventQueue {
 
     private Event[] queue;
 
+    /**
+     * Constructor
+     */
     public EventQueue(){
         queue = new Event[0];
     }
@@ -25,7 +33,7 @@ public class EventQueue {
     }
 
     /**
-     * Sorts queue in ascending order (Bubble sort)
+     * Sorts queue in ascending order
      */
     private void sort() {
         for (int i = 0; i < size(); i++) {
@@ -41,7 +49,8 @@ public class EventQueue {
     }
     
     /**
-     * Removes and returns the next element in queue
+     * Removes and returns the next event in the queue
+     * @return the next event 
      */
     public Event pop() {
         int n = size();

@@ -7,7 +7,15 @@ import lab5.store.PrintView;
 import lab5.store.StartEvent;
 import lab5.store.StoreState;
 
+/**
+ * Main program from where the simulation is run
+ * @author Hampus Kämppi, Gustav Edner, Jonathan Junel, Linus Karlsson
+ *
+ */
 public class RunSim {
+	/**
+	 * Main
+	 */
     public static void main(String[] args){
         
         int maxCheckouts = 2;
@@ -34,7 +42,7 @@ public class RunSim {
         State state = new State();
         EventQueue eventQueue = new EventQueue();
         eventQueue.push(new StartEvent(storeState,state, eventQueue));
-        eventQueue.push(new EndEvent(storeState,state, eventQueue)); //tiden 999
+        eventQueue.push(new EndEvent(storeState,state, eventQueue));
         Simulator simulator = new Simulator(state, eventQueue);
         new PrintView(state, storeState);
         simulator.run();

@@ -2,20 +2,27 @@ package lab5.store;
 
 import java.util.NoSuchElementException;
 
+/**
+ * FIFO queue for customers
+ * @author Hampus Kämppi, Gustav Edner, Jonathan Junel, Linus Karlsson
+ *
+ */
 public class CustomerQueue {
 
 	private Customer[] queue;
-	private int mSize;
 
+	/**
+	 * Constructor
+	 */
 	public CustomerQueue() {
 		queue = new Customer[0];
-		mSize = 0;
 	}
 
-	public void add(Customer item) {
-		if (mSize == this.size()) {
-			mSize++;
-		}
+	/**
+	 * Adds a customer to the end of the queue
+	 * @param item customer to add to the queue
+	 */
+	public void push(Customer item) {
 		int n = this.size();
 		Customer[] temp = new Customer[n + 1];
 		for (int i = 0; i < n; i++) {
@@ -25,46 +32,41 @@ public class CustomerQueue {
 		queue = temp;
 	}
 
+	/**
+	 * The customer at the front of the queue
+	 * @return customer at the front of the queue
+	 */
 	public Customer pop() {
-		Customer temp = first();
-		removeFirst();
-		return temp;
-	}
-
-	public Customer first() throws NoSuchElementException {
-		if (isEmpty()) {
-			throw new NoSuchElementException();
-		} else {
-			return queue[0];
+		Customer tempC = queue[0];
+		int n = this.size();
+		Customer[] temp = new Customer[n - 1];
+		for (int i = 1; i < n; i++) {
+			temp[i - 1] = queue[i];
 		}
+		queue = temp;
+		return tempC;
 	}
 
+	/**
+	 * Returns whether the queue is empty or not
+	 * @return true if the queue is empty, false other wise
+	 */
 	public boolean isEmpty() {
 		return size() == 0;
 	}
 
-	public int maxSize() {
-		return mSize;
-	}
-
-	public void removeFirst() throws NoSuchElementException {
-		if (isEmpty()) {
-			throw new NoSuchElementException();
-		} else {
-			int n = this.size();
-			Customer[] temp = new Customer[n - 1];
-			for (int i = 1; i < n; i++) {
-				// Skippar första elementet i queue
-				temp[i - 1] = queue[i];
-			}
-			queue = temp;
-		}
-	}
-
+	/**
+	 * Returns the size of the queue
+	 * @return the size of the queue
+	 */
 	public int size() {
 		return queue.length;
 	}
 
+	/**
+	 * Returns a string with the customer id's of the customers in the queue
+	 * @return string representation of the queue
+	 */
 	public String toString() {
 		String s = "[";
 		for (int i = 0; i < size(); i++) {

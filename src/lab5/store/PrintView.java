@@ -7,18 +7,33 @@ import lab5.general.State;
 import lab5.general.View;
 
 @SuppressWarnings("deprecation")
+/**
+ * Specific view of the store
+ * @author Hampus Kämppi, Gustav Edner, Jonathan Junel, Linus Karlsson
+ *
+ */
 public class PrintView extends View {
     private StoreState storeState;
 
+    /**
+     * Constructor
+     * @param state			The state of the simulator
+     * @param storeState	The state of the store
+     */
     public PrintView(State state, StoreState storeState) {
         this.storeState = storeState;
         state.addObserver(this);
     }
 
+    /**
+     * Called whenever this is notified
+     */
     public void update(Observable o, Object arg) {
         printEvents(storeState.getCurrentEvent());
     }
-
+    /**
+     * Prints simulation parameters
+     */
     public void printParameters() {
         System.out.println("PARAMETRAR\n" +
                 "==========\n" +
@@ -35,6 +50,10 @@ public class PrintView extends View {
 
     }
 
+    /**
+     * Prints details from the storestate
+     * @param e The current event
+     */
     public void printEvents(Event e) {
         switch (e.getName()) {
             case "Start":
@@ -80,6 +99,9 @@ public class PrintView extends View {
         }
     }
 
+    /**
+     * Prints simulation results
+     */
     public void printResults() {
         System.out.println("\nRESULTAT" +
                 "\n========" +

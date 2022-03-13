@@ -3,7 +3,11 @@ package lab5.store;
 import lab5.general.Event;
 import lab5.general.State;
 import lab5.store.time.*;
-
+/**
+ * State of the store
+ * @author Hampus Kämppi, Gustav Edner, Jonathan Junel, Linus Karlsson
+ *
+ */
 public class StoreState extends State {
     private double closingTime;
     private double lastTime;
@@ -35,6 +39,18 @@ public class StoreState extends State {
     private Customer currentCustomer;
     private int payedCustomers;
 
+    /**
+     * Constructor
+     * @param maxCheckouts Max number of checkouts in the store
+     * @param maxCustomers Max number of customers in the store
+     * @param lambda Customer arrival speed
+     * @param minPick Minimum time for a pick event
+     * @param maxPick Maximum time for a pick event
+     * @param minPay Minimum time for a pay event
+     * @param maxPay Maximum time for a pay event
+     * @param seed Seed for the random number generators
+     * @param closingTime Closing time of the store
+     */
     public StoreState(int maxCheckouts, int maxCustomers, int lambda, double minPick, double maxPick, double minPay,
             double maxPay, long seed, double closingTime) {
         arriveTime = new ExponentialRandomStream(lambda, seed);
@@ -58,9 +74,13 @@ public class StoreState extends State {
         payedCustomers = 0;
     }
 
-    public CustomerFactory getFactory(){
+    public CustomerFactory getFactory() {
         return customerFactory;
     }
+
+    /**
+     * Increases payedcustomers by 1
+     */
     public void increasePayedCustomers() {
         payedCustomers++;
     }
@@ -103,26 +123,41 @@ public class StoreState extends State {
     }
 
     /**
-     * checks if the store is open/closed.
+     * Checks if the store is open/closed.
      * 
-     * @return returns a bolian depending if the store is open or not
+     * @return returns a boolean depending if the store is open or not
      */
     public boolean isOpen() {
         return open;
     }
 
+    /**
+     * Decreases amount of customers in the store by 1
+     */
     public void decreaseCustomersInStore() {
         customersInStore--;
     }
 
+    /**
+     * Gets time for a pick event
+     * @return random time for pick event
+     */
     public double getPickTime() {
         return pickTime.next();
     }
 
+    /**
+     * Gets time for a pay event
+     * @return random time for pay event
+     */
     public double getPayTime() {
         return payTime.next();
     }
 
+    /**
+     * Gets time for an arrival event
+     * @return random time for arrival event
+     */
     public double getArrivalTime() {
         return arriveTime.next();
     }
@@ -134,11 +169,14 @@ public class StoreState extends State {
         open = false;
     }
 
+    /**
+     * Opens the store
+     */
     public void open() {
         open = true;
     }
 
-    /** 
+    /**
      * 
      * @return true if there is place for more customers in the store
      */
@@ -216,6 +254,9 @@ public class StoreState extends State {
         return seed;
     }
 
+    /**
+     * Increased total amount of queued customers by 1
+     */
     public void customerQueued() {
         customersQueued++;
     }
@@ -240,18 +281,23 @@ public class StoreState extends State {
         return totalQueueTime;
     }
 
-    public double getLastPayTime(){
+    public double getLastPayTime() {
         return lastPayTime;
     }
 
+    /**
+     * Updates the time customers have been in the checkout queue as well as
+     * updates the time checkouts have been unoccupied
+     * @param nextEvent the next event to be executed
+     */
     public void updateTime(Event nextEvent) {
         lastTime = currentEvent.getTime();
         currentTime = nextEvent.getTime();
         currentEvent = nextEvent;
 
         if (nextEvent.getName() != "Stopp" && nextEvent.getName() != "Ankomst" || isOpen()) {
-            totalQueueTime +=(currentTime - lastTime) * customerQueue.size();
-            freeCheckoutTime+=(currentTime - lastTime) * getFreeCheckouts();
+            totalQueueTime += (currentTime - lastTime) * customerQueue.size();
+            freeCheckoutTime += (currentTime - lastTime) * getFreeCheckouts();
             lastPayTime = currentTime;
         }
     }
