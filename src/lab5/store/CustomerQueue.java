@@ -1,7 +1,5 @@
 package lab5.store;
 
-import java.util.NoSuchElementException;
-
 /**
  * FIFO queue for customers
  * @author Hampus Kämppi, Gustav Edner, Jonathan Junel, Linus Karlsson
