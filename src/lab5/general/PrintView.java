@@ -78,6 +78,24 @@ public class PrintView extends View {
     }
 
     public void printResults() {
-        System.out.println("============000============");
+        System.out.println("\nRESULTAT" +
+                "\n========" +
+
+                "\n1) Av " + (storeState.getMissedCostumers() + storeState.getPayedCustomers()) + " kunder handlade "
+                + storeState.getPayedCustomers() + " medan " + storeState.getMissedCostumers() + " missades.\n" +
+
+                "\n2) Total tid " + storeState.getMaxCheckouts() + " kassor lediga: "
+                + String.format("%.2f", storeState.getFreeCheckoutTime()) + " te.\n" +
+                "Genomsnittlig ledig kassatid: "
+                + String.format("%.2f", (storeState.getFreeCheckoutTime() / storeState.getMaxCheckouts())) + " (dvs. "
+                + String.format("%.2f",
+                        ((storeState.getFreeCheckoutTime() / storeState.getMaxCheckouts())
+                                / storeState.getLastPayTime()) * 100)
+                + "% av tiden från öppning tills sista kunden betalat).\n" +
+
+                "\n3) Total tid " + storeState.getCustomersQueued() + " kunder tvingats köa: "
+                + String.format("%.2f", storeState.getTotalQueueTime()) + " te."
+                + "\nGenomsnittlig kötid: "
+                + String.format("%.2f", storeState.getTotalQueueTime() / storeState.getCustomersQueued()) + " te.");
     }
 }

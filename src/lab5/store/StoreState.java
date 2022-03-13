@@ -7,6 +7,7 @@ import lab5.store.time.*;
 public class StoreState extends State {
     private double closingTime;
     private double lastTime;
+    private double lastPayTime;
     private double currentTime;
     private double minPay;
     private double maxPay;
@@ -16,8 +17,8 @@ public class StoreState extends State {
     private UniformRandomStream pickTime;
     private UniformRandomStream payTime;
 
-    public CustomerFactory customerFactory;
-    public CustomerQueue customerQueue;
+    private CustomerFactory customerFactory;
+    private CustomerQueue customerQueue;
 
     private boolean open;
     private int maxCustomers;
@@ -39,7 +40,7 @@ public class StoreState extends State {
         arriveTime = new ExponentialRandomStream(lambda, seed);
         pickTime = new UniformRandomStream(minPick, maxPick, seed);
         payTime = new UniformRandomStream(minPay, maxPay, seed);
-        this.closingTime = closingTime; // denna får man bestämma själv, körexempel 1 har 10.0, 2 har 8.0
+        this.closingTime = closingTime;
         this.maxCheckouts = maxCheckouts;
         this.maxCustomers = maxCustomers;
         this.seed = seed;
@@ -57,6 +58,9 @@ public class StoreState extends State {
         payedCustomers = 0;
     }
 
+    public CustomerFactory getFactory(){
+        return customerFactory;
+    }
     public void increasePayedCustomers() {
         payedCustomers++;
     }
@@ -134,7 +138,7 @@ public class StoreState extends State {
         open = true;
     }
 
-    /**
+    /** 
      * 
      * @return true if there is place for more customers in the store
      */
@@ -228,14 +232,6 @@ public class StoreState extends State {
         customersInStore++;
     }
 
-    public void increaseFreeCheckoutTime(double value) {
-        freeCheckoutTime += value;
-    }
-
-    public void increaseTotalQueueTime(double value) {
-        totalQueueTime += value;
-    }
-
     public double getFreeCheckoutTime() {
         return freeCheckoutTime;
     }
@@ -244,15 +240,19 @@ public class StoreState extends State {
         return totalQueueTime;
     }
 
+    public double getLastPayTime(){
+        return lastPayTime;
+    }
+
     public void updateTime(Event nextEvent) {
         lastTime = currentEvent.getTime();
         currentTime = nextEvent.getTime();
-
         currentEvent = nextEvent;
 
-        if (nextEvent.getName() != "Stopp" && !(nextEvent.getName() == "Ankomst" && !isOpen())) {
-            increaseFreeCheckoutTime((currentTime - lastTime) * getFreeCheckouts());
-            increaseTotalQueueTime((currentTime - lastTime) * customerQueue.size());
+        if (nextEvent.getName() != "Stopp" && nextEvent.getName() != "Ankomst" || isOpen()) {
+            totalQueueTime +=(currentTime - lastTime) * customerQueue.size();
+            freeCheckoutTime+=(currentTime - lastTime) * getFreeCheckouts();
+            lastPayTime = currentTime;
         }
     }
 }
