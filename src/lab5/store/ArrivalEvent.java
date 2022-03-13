@@ -17,7 +17,7 @@ public class ArrivalEvent extends Event {
 		this.storeState = storeState;
 		this.eventQueue = eventQueue;
 		this.time = time;
-		customer = storeState.customerFactory.createCustomer();
+		customer = storeState.getFactory().createCustomer();
 	}
 
 	public void execute() {
