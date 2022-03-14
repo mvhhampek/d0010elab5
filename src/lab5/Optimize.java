@@ -27,13 +27,19 @@ public class Optimize implements K {
 	private double closingTime = END_TIME;
 
 	/**
-	 * Runs simulation with given parameters
 	 * 
-	 * @param maxCheckouts Max amount of checkouts in the store
-	 * @param seed         seed for the random number generators
-	 * @return the final state of the store
+	 * @param maxCheckouts Amount of checkouts
+	 * @param maxCustomers Max amount of customers in the store
+	 * @param lambda	Customer arrival speed
+	 * @param pickMin	Lower bound for pick time
+	 * @param pickMax	Upper bound for pick time
+	 * @param payMin	Upper bound for pay time
+	 * @param payMax	Lower bound for pay time
+	 * @param seed	Seed for random number generators
+	 * @param closingTime	Closing time for the store
+	 * @return	Amount of missed custoemrs
 	 */
-	public int metod1(int maxCheckouts, int maxCustomers, double lambda, double pickMin, double pickMax,
+	public int runOnce(int maxCheckouts, int maxCustomers, double lambda, double pickMin, double pickMax,
 			double payMin, double payMax,
 			int seed, double closingTime) {
 		StoreState storeState = new StoreState(maxCheckouts, maxCustomers, lambda, pickMin, pickMax, payMin, payMax,
@@ -48,47 +54,53 @@ public class Optimize implements K {
 	}
 
 	/**
-	 * Method to find the optimal number of checkouts for the given seed
+	 * Method to find the optimal number of checkouts for a given seed
 	 * 
 	 * @param seed seed for random number generators
 	 * @return the optimal number of checkouts for the given seed
 	 */
-	public int metod2(int seed) {
+	public int optCheckoutsGivenSeed(int seed) {
 		int minCheckouts = maxCustomers;
-		int missedCustomers = metod1(minCheckouts, maxCustomers, lambda, pickMin, pickMax, payMin, payMax, seed,
+		int missedCustomers = runOnce(minCheckouts, maxCustomers, lambda, pickMin, pickMax, payMin, payMax, seed,
 				closingTime);
 		while (minCheckouts >= 1) {
-			int currentMissedCustomers = metod1(minCheckouts, maxCustomers, lambda, pickMin, pickMax, payMin, payMax,
+			int currentMissedCustomers = runOnce(minCheckouts, maxCustomers, lambda, pickMin, pickMax, payMin, payMax,
 					seed, closingTime);
-			//System.out.println("kassor: " + minCheckouts + "\t\tmissade kunder: " + currentMissedCustomers + "\t\tjämf. " + missedCustomers);
 			if (missedCustomers != currentMissedCustomers) {
 				return minCheckouts + 1;
 			}
 			minCheckouts--;
 		}
-		//System.out.println("==================");
 		return maxCustomers;
 	}
 
-	public int metod3(int seed) {
-		int minCheckouts = 0;
+	/**
+	 * Method to find optimal amount of checkouts independent of the random number generators seed
+	 * @param seed seed for random number generator
+	 * @return Optimal amount of checkouts
+	 */
+	public int optCheckoutsRandomSeed(int seed) {
+		int compare = Integer.MAX_VALUE;
 		Random ran = new Random(seed);
-		for (int i = 0; i < 100; i++) {
-			int currentCheckouts = metod2(ran.nextInt());
-			System.out.println("Nuvarande kassor:" + currentCheckouts + "\t\tMin. kassor: " + minCheckouts);
-			if (minCheckouts != Math.max(minCheckouts, currentCheckouts)) {
+		int i = 0;
+		while (i < 100) {
+			int checkouts = optCheckoutsGivenSeed(ran.nextInt());
+			if (checkouts < compare) {
+				compare = checkouts;
 				i = 0;
-			}else{ 
-				minCheckouts = Math.max(minCheckouts, currentCheckouts);
 			}
+			i++;
 		}
-		return minCheckouts;
+		return compare;
 	}
 
+	/**
+	 * Main
+	 * @param args runtime arguments
+	 */
 	public static void main(String[] args) {
 		Optimize o = new Optimize();
-		System.out.println("metod 2: " + o.metod2(o.seed));
-		System.out.println("--------------------");
-		System.out.println("metod 3: " + o.metod3(o.seed));
+		System.out.println("metod 2: " + o.optCheckoutsGivenSeed(o.seed));
+		System.out.println("metod 3: " + o.optCheckoutsRandomSeed(o.seed));
 	}
 }
