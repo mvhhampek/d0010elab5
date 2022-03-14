@@ -48,6 +48,7 @@ public class PickEvent extends Event {
 		if (storeState.getFreeCheckouts() > 0) {
 			storeState.occupyACheckout();
 			eventQueue.push(new PayEvent(storeState, state, eventQueue, time + storeState.getPayTime(), customer));
+			
 		} else {
 			storeState.customerQueued();
 			customerQueue.push(customer);

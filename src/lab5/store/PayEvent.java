@@ -45,10 +45,11 @@ public class PayEvent extends Event {
 		storeState.updateTime(this);
 		storeState.setCurrentCustomer(customer);
 		state.notifyObs();
+		storeState.increasePayedCustomers();
 		storeState.decreaseCustomersInStore();
 		if (!queue.isEmpty()) {
 			eventQueue.push(new PayEvent(storeState, state, eventQueue, time + storeState.getPayTime(), queue.pop()));
-			storeState.increasePayedCustomers();
+			
 		} else {
 			storeState.freeACheckout();
 		}

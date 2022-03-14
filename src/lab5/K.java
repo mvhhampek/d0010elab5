@@ -2,33 +2,33 @@ package lab5;
 public interface K {
 
 	// Ex 1: (som sim1)
-   public static final int M = 5;
-   public static final double L = 1;
-
-   public static final double LOW_COLLECTION_TIME = 0.5d;
-   public static final double HIGH_COLLECTION_TIME = 1d;
-
-   public static final double LOW_PAYMENT_TIME = 2d;
-   public static final double HIGH_PAYMENT_TIME = 3d;
-
-   public static final int SEED = 1234;
-   public static final double END_TIME = 10.0d;
-   public static final double STOP_TIME = 999.0d;
+//   public static final int M = 5;
+//   public static final double L = 1;
+//
+//   public static final double LOW_COLLECTION_TIME = 0.5d;
+//   public static final double HIGH_COLLECTION_TIME = 1d;
+//
+//   public static final double LOW_PAYMENT_TIME = 2d;
+//   public static final double HIGH_PAYMENT_TIME = 3d;
+//
+//   public static final int SEED = 1234;
+//   public static final double END_TIME = 10.0d;
+//   public static final double STOP_TIME = 999.0d;
 		
 	
 	// Ex 2: 
-	  // public static final int M = 7;
-	  // public static final double L = 2;
+	   public static final int M = 7;
+	   public static final double L = 2;
 
-	  // public static final double LOW_COLLECTION_TIME = 0.5d;
-	  // public static final double HIGH_COLLECTION_TIME = 1d;
+	   public static final double LOW_COLLECTION_TIME = 0.5d;
+	   public static final double HIGH_COLLECTION_TIME = 1d;
 
-	  // public static final double LOW_PAYMENT_TIME = 2d;
-	  // public static final double HIGH_PAYMENT_TIME = 3d;
+	   public static final double LOW_PAYMENT_TIME = 2d;
+	   public static final double HIGH_PAYMENT_TIME = 3d;
 
-	  // public static final int SEED = 1234;
-	  // public static final double END_TIME = 10.0d;
-	  // public static final double STOP_TIME = 999.0d;
+	   public static final int SEED = 1234;
+	   public static final double END_TIME = 10.0d;
+	   public static final double STOP_TIME = 999.0d;
 	  
 	// Ex 3: (som sim2)
 //  public static final int M = 7;
