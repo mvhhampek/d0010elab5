@@ -47,8 +47,7 @@ public class ArrivalEvent extends Event {
 		if (storeState.isOpen()) {
 			if (storeState.space()) {
 				storeState.increaseCustomersInStore();
-				eventQueue
-						.push(new PickEvent(storeState, state, eventQueue, time + storeState.getPickTime(), customer));
+				eventQueue.push(new PickEvent(storeState, state, eventQueue, time + storeState.getPickTime(), customer));
 			} else {
 				storeState.missedCustomer();
 			}
