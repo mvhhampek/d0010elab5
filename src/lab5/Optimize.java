@@ -55,7 +55,7 @@ public class Optimize implements K {
 	 */
 	public int metod2(int seed) {
 		int minCheckouts = maxCustomers;
-
+		
 		int missedCustomers = metod1(minCheckouts, maxCustomers, lambda, pickMin, pickMax, payMin, payMax, seed,
 				closingTime);
 
