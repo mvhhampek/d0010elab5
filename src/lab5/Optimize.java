@@ -76,10 +76,11 @@ public class Optimize implements K {
 		for (int i = 0; i < 100; i++) {
 			int currentCheckouts = metod2(ran.nextInt());
 			System.out.println("Nuvarande kassor:" + currentCheckouts + "\t\tMin. kassor: " + minCheckouts);
-			if (minCheckouts == Math.max(minCheckouts, currentCheckouts)) {
+			if (minCheckouts != Math.max(minCheckouts, currentCheckouts)) {
 				i = 0;
+			}else{ 
+				minCheckouts = Math.max(minCheckouts, currentCheckouts);
 			}
-			minCheckouts = Math.max(minCheckouts, currentCheckouts);
 		}
 		return minCheckouts;
 	}
