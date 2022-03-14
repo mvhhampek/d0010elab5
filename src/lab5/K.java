@@ -17,18 +17,18 @@ public interface K {
 		
 	
 	// Ex 2: 
-	  public static final int M = 7;
-	  public static final double L = 2;
+	  // public static final int M = 7;
+	  // public static final double L = 2;
 
-	  public static final double LOW_COLLECTION_TIME = 0.5d;
-	  public static final double HIGH_COLLECTION_TIME = 1d;
+	  // public static final double LOW_COLLECTION_TIME = 0.5d;
+	  // public static final double HIGH_COLLECTION_TIME = 1d;
 
-	  public static final double LOW_PAYMENT_TIME = 2d;
-	  public static final double HIGH_PAYMENT_TIME = 3d;
+	  // public static final double LOW_PAYMENT_TIME = 2d;
+	  // public static final double HIGH_PAYMENT_TIME = 3d;
 
-	  public static final int SEED = 1234;
-	  public static final double END_TIME = 10.0d;
-	  public static final double STOP_TIME = 999.0d;
+	  // public static final int SEED = 1234;
+	  // public static final double END_TIME = 10.0d;
+	  // public static final double STOP_TIME = 999.0d;
 	  
 	// Ex 3: (som sim2)
 //  public static final int M = 7;
@@ -45,18 +45,18 @@ public interface K {
 //  public static final double STOP_TIME = 999.0d;
   
 	// Ex 4
-//    public static final int M = 100;
-//    public static final double L = 50;
-//
-//    public static final double LOW_COLLECTION_TIME = 0.45d;
-//    public static final double HIGH_COLLECTION_TIME = 0.65d;
-//
-//    public static final double LOW_PAYMENT_TIME = 0.2d;
-//    public static final double HIGH_PAYMENT_TIME = 0.3d;
-//
-//    public static final int SEED = 42;
-//    public static final double END_TIME = 20.0d;
-//    public static final double STOP_TIME = 999.0d;
+   public static final int M = 100;
+   public static final double L = 50;
+
+   public static final double LOW_COLLECTION_TIME = 0.45d;
+   public static final double HIGH_COLLECTION_TIME = 0.65d;
+
+   public static final double LOW_PAYMENT_TIME = 0.2d;
+   public static final double HIGH_PAYMENT_TIME = 0.3d;
+
+   public static final int SEED = 42;
+   public static final double END_TIME = 20.0d;
+   public static final double STOP_TIME = 999.0d;
 
     // Ex 5
     
