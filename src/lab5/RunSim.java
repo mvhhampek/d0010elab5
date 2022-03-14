@@ -18,7 +18,6 @@ public class RunSim {
 	 * @param args Runtime arguments
 	 */
     public static void main(String[] args){
-        
         int maxCheckouts = 2;
         int maxCustomers = 5;
         int lambda = 1;
