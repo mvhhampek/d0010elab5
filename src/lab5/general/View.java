@@ -4,7 +4,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * General View 
+ * General View
+ * 
  * @author Hampus Kämppi, Gustav Edner, Jonathan Junel, Linus Karlsson
  *
  */

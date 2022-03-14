@@ -15,6 +15,7 @@ public class UniformRandomStream {
 
 	/**
 	 * Constructor
+	 * 
 	 * @param lower Lower bound of the intervall
 	 * @param upper Upper bound of the intervall
 	 * @param seed  Random number generators seed
@@ -27,6 +28,7 @@ public class UniformRandomStream {
 
 	/**
 	 * Constructor
+	 * 
 	 * @param lower Lower bound of the intervall
 	 * @param upper Upper bound of the intervall
 	 */
@@ -38,6 +40,7 @@ public class UniformRandomStream {
 
 	/**
 	 * Returns random number within intervall
+	 * 
 	 * @return random number
 	 */
 	public double next() {

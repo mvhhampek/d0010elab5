@@ -2,6 +2,7 @@ package lab5.store;
 
 /**
  * FIFO queue for customers
+ * 
  * @author Hampus Kämppi, Gustav Edner, Jonathan Junel, Linus Karlsson
  *
  */
@@ -18,6 +19,7 @@ public class CustomerQueue {
 
 	/**
 	 * Adds a customer to the end of the queue
+	 * 
 	 * @param item customer to add to the queue
 	 */
 	public void push(Customer item) {
@@ -32,6 +34,7 @@ public class CustomerQueue {
 
 	/**
 	 * The customer at the front of the queue
+	 * 
 	 * @return customer at the front of the queue
 	 */
 	public Customer pop() {
@@ -47,6 +50,7 @@ public class CustomerQueue {
 
 	/**
 	 * Returns whether the queue is empty or not
+	 * 
 	 * @return true if the queue is empty, false other wise
 	 */
 	public boolean isEmpty() {
@@ -55,6 +59,7 @@ public class CustomerQueue {
 
 	/**
 	 * Returns the size of the queue
+	 * 
 	 * @return the size of the queue
 	 */
 	public int size() {
@@ -63,6 +68,7 @@ public class CustomerQueue {
 
 	/**
 	 * Returns a string with the customer id's of the customers in the queue
+	 * 
 	 * @return string representation of the queue
 	 */
 	public String toString() {

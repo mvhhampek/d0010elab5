@@ -6,33 +6,37 @@ import java.util.Random;
  * Exponentially distributed random numbers
  */
 public class ExponentialRandomStream {
-	
+
 	private Random rand;
 	private double lambda;
-	  /**
-	   * Constructor
-	   * @param lambda number of customers per hour
-	   * @param seed, random number generators seed
-	   */
+
+	/**
+	 * Constructor
+	 * 
+	 * @param lambda number of customers per hour
+	 * @param seed,  random number generators seed
+	 */
 	public ExponentialRandomStream(double lambda, long seed) {
-	  	rand = new Random(seed);
-	  	this.lambda = lambda;
+		rand = new Random(seed);
+		this.lambda = lambda;
 	}
-	  /**
-	   * Constructor
-	   * @param lambda number of customers per hour
-	   */
+
+	/**
+	 * Constructor
+	 * 
+	 * @param lambda number of customers per hour
+	 */
 	public ExponentialRandomStream(double lambda) {
 		rand = new Random();
-	    this.lambda = lambda;
+		this.lambda = lambda;
 	}
-	  
+
 	/**
 	 * Returns a random number
+	 * 
 	 * @return random number
 	 */
 	public double next() {
-	  	return -Math.log(rand.nextDouble())/lambda;
+		return -Math.log(rand.nextDouble()) / lambda;
 	}
 }
-

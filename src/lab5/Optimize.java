@@ -30,14 +30,14 @@ public class Optimize implements K {
 	 * 
 	 * @param maxCheckouts Amount of checkouts
 	 * @param maxCustomers Max amount of customers in the store
-	 * @param lambda	Customer arrival speed
-	 * @param pickMin	Lower bound for pick time
-	 * @param pickMax	Upper bound for pick time
-	 * @param payMin	Upper bound for pay time
-	 * @param payMax	Lower bound for pay time
-	 * @param seed	Seed for random number generators
-	 * @param closingTime	Closing time for the store
-	 * @return	Amount of missed custoemrs
+	 * @param lambda       Customer arrival speed
+	 * @param pickMin      Lower bound for pick time
+	 * @param pickMax      Upper bound for pick time
+	 * @param payMin       Upper bound for pay time
+	 * @param payMax       Lower bound for pay time
+	 * @param seed         Seed for random number generators
+	 * @param closingTime  Closing time for the store
+	 * @return Amount of missed custoemrs
 	 */
 	public int runOnce(int maxCheckouts, int maxCustomers, double lambda, double pickMin, double pickMax,
 			double payMin, double payMax,
@@ -75,7 +75,9 @@ public class Optimize implements K {
 	}
 
 	/**
-	 * Method to find optimal amount of checkouts independent of the random number generators seed
+	 * Method to find optimal amount of checkouts independent of the random number
+	 * generators seed
+	 * 
 	 * @param seed seed for random number generator
 	 * @return Optimal amount of checkouts
 	 */
@@ -96,6 +98,7 @@ public class Optimize implements K {
 
 	/**
 	 * Main
+	 * 
 	 * @param args runtime arguments
 	 */
 	public static void main(String[] args) {

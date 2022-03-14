@@ -1,6 +1,8 @@
 package lab5.general;
+
 /**
  * General simulator
+ * 
  * @author Hampus Kämppi, Gustav Edner, Jonathan Junel, Linus Karlsson
  *
  */
@@ -10,8 +12,9 @@ public class Simulator {
 
     /**
      * Constructor
-     * @param state			The state of the simulation
-     * @param eventQueue	The eventqueue
+     * 
+     * @param state      The state of the simulation
+     * @param eventQueue The eventqueue
      */
     public Simulator(State state, EventQueue eventQueue) {
         this.state = state;

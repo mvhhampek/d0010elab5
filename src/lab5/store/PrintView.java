@@ -8,6 +8,7 @@ import lab5.general.View;
 
 /**
  * Specific view of the store
+ * 
  * @author Hampus Kämppi, Gustav Edner, Jonathan Junel, Linus Karlsson
  *
  */
@@ -17,8 +18,9 @@ public class PrintView extends View {
 
     /**
      * Constructor
-     * @param state			The state of the simulator
-     * @param storeState	The state of the store
+     * 
+     * @param state      The state of the simulator
+     * @param storeState The state of the store
      */
     public PrintView(State state, StoreState storeState) {
         this.storeState = storeState;
@@ -31,6 +33,7 @@ public class PrintView extends View {
     public void update(Observable o, Object arg) {
         printEvents(storeState.getCurrentEvent());
     }
+
     /**
      * Prints simulation parameters
      */
@@ -52,6 +55,7 @@ public class PrintView extends View {
 
     /**
      * Prints details from the storestate
+     * 
      * @param e The current event
      */
     public void printEvents(Event e) {

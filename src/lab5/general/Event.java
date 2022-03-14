@@ -1,7 +1,8 @@
 package lab5.general;
 
-/** 
- * General Event 
+/**
+ * General Event
+ * 
  * @author Hampus Kämppi, Gustav Edner, Jonathan Junel, Linus Karlsson
  *
  */
@@ -32,12 +33,14 @@ public abstract class Event {
 
 	/**
 	 * Returns this events time
+	 * 
 	 * @return time
 	 */
 	public abstract double getTime();
 
 	/**
 	 * Returns this events name
+	 * 
 	 * @return name
 	 */
 	public abstract String getName();
