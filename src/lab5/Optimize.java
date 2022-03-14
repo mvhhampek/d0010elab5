@@ -57,7 +57,7 @@ public class Optimize implements K {
 		int minCheckouts = maxCustomers;
 		int missedCustomers = metod1(minCheckouts, maxCustomers, lambda, pickMin, pickMax, payMin, payMax, seed,
 				closingTime);
-		while (minCheckouts > 0) {
+		while (minCheckouts >= 1) {
 			int currentMissedCustomers = metod1(minCheckouts, maxCustomers, lambda, pickMin, pickMax, payMin, payMax,
 					seed, closingTime);
 			if (missedCustomers != currentMissedCustomers) {
