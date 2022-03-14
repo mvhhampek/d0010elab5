@@ -14,7 +14,7 @@ public class StoreState extends State {
     private double closingTime;
     private double lastTime;
     private double lastPayTime;
-    private double currentTime;
+    
     private double minPay;
     private double maxPay;
     private double minPick;
