@@ -21,7 +21,7 @@ public class CustomerQueue {
 	 * @param item customer to add to the queue
 	 */
 	public void push(Customer item) {
-		int n = this.size();
+		int n = size();
 		Customer[] temp = new Customer[n + 1];
 		for (int i = 0; i < n; i++) {
 			temp[i] = queue[i];
@@ -36,7 +36,7 @@ public class CustomerQueue {
 	 */
 	public Customer pop() {
 		Customer tempC = queue[0];
-		int n = this.size();
+		int n = size();
 		Customer[] temp = new Customer[n - 1];
 		for (int i = 1; i < n; i++) {
 			temp[i - 1] = queue[i];

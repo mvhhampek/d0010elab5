@@ -138,23 +138,6 @@ public class StoreState extends State {
     }
 
     /**
-     * saves the current time
-     * @param value value is the current time
-     */
-    public void setCurrentTime(double value) {
-        currentTime = value;
-    }
-
-    /**
-     * send the current time
-     * 
-     * @return the current time
-     */
-    public double getCurrentTime() {
-        return currentTime;
-    }
-
-    /**
      * Checks if the store is open/closed.
      * 
      * @return returns a boolean depending if the store is open or not
@@ -287,32 +270,32 @@ public class StoreState extends State {
     }
 
     /**
-     * returns the maximum time a customer has to pick food
-     * @return return the maximum time a customer has to pick food
+     * returns the upper bound of the pick time intervall
+     * @return upper bound pick time
      */
     public double getMaxPickTime() {
         return maxPick;
     }
 
     /**
-     * returns the minimum time a customer has to pick food
-     * @return return the minimum time a customer has to pick food
+     * returns the lower bound of the pick time intervall
+     * @return lower bound pick time
      */
     public double getMinPickTime() {
         return minPick;
     }
 
     /**
-     * returns the maximum time a customer has to pay
-     * @return return the maximum time a customer has to pay
+     * returns the upper bound of the pay time intervall
+     * @return upper bound pay time
      */
     public double getMaxPayTime() {
         return maxPay;
     }
 
     /**
-     * returns the minimum time a customer has to pay
-     * @return return the minimum time a customer has to pay
+     * returns the lower bound of the pay time intervall
+     * @return lower bound pay time
      */
     public double getMinPayTime() {
         return minPay;

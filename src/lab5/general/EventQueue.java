@@ -1,7 +1,7 @@
 package lab5.general;
 
 /**
- * 
+ * Specific container for events
  * @author Hampus Kämppi, Gustav Edner, Jonathan Junel, Linus Karlsson
  *
  */
