@@ -15,27 +15,27 @@ import java.util.Random;
  * @author Hampus Kämppi, Gustav Edner, Jonathan Junel, Linus Karlsson
  *
  */
-public class Optimize {
-	
-	public Optimize() {
-		System.out.println("ttt");
-	}
-	
-    private int maxCustomers = 5;
-    private int lambda = 1;
-    private double pickMin = 0.5;
-    private double pickMax = 1.0;
-    private double payMin = 2.0;
-    private double payMax = 3.0;
-    private double closingTime = 10.0;
+public class Optimize implements K {
+
+	private int seed = SEED;
+	private int maxCustomers = M;
+	private double lambda = L;
+	private double pickMin = LOW_COLLECTION_TIME;
+	private double pickMax = HIGH_COLLECTION_TIME;
+	private double payMin = LOW_PAYMENT_TIME;
+	private double payMax = HIGH_PAYMENT_TIME;
+	private double closingTime = END_TIME;
 
 	/**
-	 * Runs simulation with given parameters 
+	 * Runs simulation with given parameters
+	 * 
 	 * @param maxCheckouts Max amount of checkouts in the store
-	 * @param seed seed for the random number generators
+	 * @param seed         seed for the random number generators
 	 * @return the final state of the store
 	 */
-	public StoreState metod1(int maxCheckouts, long seed) {
+	public int metod1(int maxCheckouts, int maxCustomers, double lambda, double pickMin, double pickMax,
+			double payMin, double payMax,
+			int seed, double closingTime) {
 		StoreState storeState = new StoreState(maxCheckouts, maxCustomers, lambda, pickMin, pickMax, payMin, payMax,
 				seed, closingTime);
 		State state = new State();
@@ -44,60 +44,49 @@ public class Optimize {
 		eventQueue.push(new EndEvent(storeState, state, eventQueue));
 		Simulator simulator = new Simulator(state, eventQueue);
 		simulator.run();
-		return storeState;
+		return storeState.getMissedCostumers();
 	}
 
 	/**
 	 * Method to find the optimal number of checkouts for the given seed
+	 * 
 	 * @param seed seed for random number generators
 	 * @return the optimal number of checkouts for the given seed
 	 */
-	public int metod2(long seed) {
-		int antalCustomer = metod1(1, seed).getMaxCustomers();
-		int antalKassor = 0;
-		int antalMissade = antalCustomer;
-		for (int i = 1; i <= antalCustomer; i++) {
-			if (metod1(i, seed).getMissedCostumers() < antalMissade) {
-				antalMissade = metod1(i, seed).getMissedCostumers();
-				antalKassor = i;
+	public int metod2(int seed) {
+		int minCheckouts = maxCustomers;
+
+		int missedCustomers = metod1(minCheckouts, maxCustomers, lambda, pickMin, pickMax, payMin, payMax, seed,
+				closingTime);
+
+		while (minCheckouts > 0) {
+			int currentMissedCustomers = metod1(minCheckouts, maxCustomers, lambda, pickMin, pickMax, payMin, payMax,
+					seed, closingTime);
+			if (missedCustomers != currentMissedCustomers) {
+				return minCheckouts + 1;
 			}
-			if (antalMissade == 0) {
-				return antalKassor;
-			}
+			minCheckouts--;
 		}
-		return antalKassor;
+
+		return maxCustomers;
 	}
 
-	/**
-	 * metod3 kör metod2 som kör metod1. metod3 letar efter den mest rimmliga antal
-	 * kassor, för metod2 kan ge olika värden. Efter 100 varv av samma svar avbryts
-	 * metod 3
-	 * 
-	 * @param f f är ett random heltal	
-	 * @return returnerar det högstMinsta antal kassor.
-	 */
-	public int metod3(long f) {
-		Random ran = new Random(f);
-		boolean run = true;
-		int högstaMinsta = metod2(ran.nextLong());
-		int loop = 100;
-		while (run) {
-			if (loop == 0) {
-				run = false;
+	public int metod3(int seed) {
+		int minCheckouts = 0;
+		Random ran = new Random(seed);
+		for (int i = 0; i < 100; i++) {
+			int currentCheckouts = metod2(ran.nextInt());
+			if (minCheckouts != Math.max(minCheckouts, currentCheckouts)) {
+				i = 0;
 			}
-			if (metod2(ran.nextLong()) > högstaMinsta) {
-				högstaMinsta = metod2(ran.nextLong());
-				loop = 100;
-			}
-			if (metod2(ran.nextLong()) == högstaMinsta) {
-				loop--;
-			}
+			minCheckouts = Math.max(minCheckouts, currentCheckouts);
 		}
-		return högstaMinsta;
+		return minCheckouts;
 	}
 
 	public static void main(String[] args) {
 		Optimize o = new Optimize();
-		System.out.println(o.metod3(123));
+		System.out.println("metod 2: " + o.metod2(o.seed));
+		System.out.println("metod 3: " + o.metod3(o.seed));
 	}
 }

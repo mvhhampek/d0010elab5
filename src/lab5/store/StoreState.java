@@ -30,8 +30,8 @@ public class StoreState extends State {
     private int occupiedCheckouts;
     private int missedCostumers;
     private int maxCheckouts;
-    private int lambda;
-    private long seed;
+    private double lambda;
+    private int seed;
     private int customersQueued;
     private double totalQueueTime;
     private double freeCheckoutTime;
@@ -51,8 +51,8 @@ public class StoreState extends State {
      * @param seed Seed for the random number generators
      * @param closingTime Closing time of the store
      */
-    public StoreState(int maxCheckouts, int maxCustomers, int lambda, double minPick, double maxPick, double minPay,
-            double maxPay, long seed, double closingTime) {
+    public StoreState(int maxCheckouts, int maxCustomers, double lambda, double minPick, double maxPick, double minPay,
+            double maxPay, int seed, double closingTime) {
         arriveTime = new ExponentialRandomStream(lambda, seed);
         pickTime = new UniformRandomStream(minPick, maxPick, seed);
         payTime = new UniformRandomStream(minPay, maxPay, seed);
@@ -119,7 +119,7 @@ public class StoreState extends State {
      * returns the value lambda, which is the amount of customers allowed per hour
      * @return return value lambda which is the amount of customers allowed per hour
      */
-    public int getLambda() {
+    public double getLambda() {
         return lambda;
     }
 
@@ -307,7 +307,7 @@ public class StoreState extends State {
      * returns the current seed
      * @return return the current seed
      */
-    public long getSeed() {
+    public int getSeed() {
         return seed;
     }
 

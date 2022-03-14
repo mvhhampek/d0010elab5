@@ -25,7 +25,7 @@ public class RunSim {
         double pickMax = 1.0;
         double payMin = 2.0;
         double payMax = 3.0;
-        long seed = 1234;
+        int seed = 1234;
         double closingTime = 10.0;
         
         // int maxCheckouts = 2;
