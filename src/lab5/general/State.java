@@ -11,6 +11,7 @@ import java.util.Observable;
 @SuppressWarnings("deprecation")
 public class State extends Observable {
 
+	protected double currentTime;
 	private boolean simulationRunning;
 
 	/**
