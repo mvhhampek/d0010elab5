@@ -1,7 +1,7 @@
 package lab5.store;
 
-import lab5.general.Event;
 import lab5.general.EventQueue;
+import lab5.general.GeneralStartEvent;
 import lab5.general.State;
 
 /**
@@ -10,7 +10,7 @@ import lab5.general.State;
  * @author Hampus Kämppi, Gustav Edner, Jonathan Junel, Linus Karlsson
  *
  */
-public class StartEvent extends Event {
+public class StartEvent extends GeneralStartEvent {
 	private EventQueue eventQueue;
 	private double time;
 	private StoreState storeState;
