@@ -2,6 +2,7 @@ package lab5.general;
 
 /**
  * Specific container for events
+ * 
  * @author Hampus Kämppi, Gustav Edner, Jonathan Junel, Linus Karlsson
  *
  */
@@ -12,7 +13,7 @@ public class EventQueue {
     /**
      * Constructor
      */
-    public EventQueue(){
+    public EventQueue() {
         queue = new Event[0];
     }
 
@@ -21,10 +22,10 @@ public class EventQueue {
      * 
      * @param e Event to add
      */
-    public void push(Event e){
+    public void push(Event e) {
         int n = size();
         Event[] temp = new Event[n + 1];
-        for (int i = 0; i < n; i++){
+        for (int i = 0; i < n; i++) {
             temp[i] = queue[i];
         }
         temp[n] = e;
@@ -45,12 +46,13 @@ public class EventQueue {
                     queue[j] = temp;
                 }
             }
-        } 
+        }
     }
-    
+
     /**
      * Removes and returns the next event in the queue
-     * @return the next event 
+     * 
+     * @return the next event
      */
     public Event pop() {
         int n = size();
@@ -65,6 +67,7 @@ public class EventQueue {
 
     /**
      * Returns size of EventQueue
+     * 
      * @return size of EventQueue
      */
     public int size() {

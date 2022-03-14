@@ -3,8 +3,10 @@ package lab5.store;
 import lab5.general.Event;
 import lab5.general.EventQueue;
 import lab5.general.State;
+
 /**
  * Specific pick event for the store
+ * 
  * @author Hampus Kämppi, Gustav Edner, Jonathan Junel, Linus Karlsson
  *
  */
@@ -18,13 +20,14 @@ public class PickEvent extends Event {
 
 	/**
 	 * Constructor
+	 * 
 	 * @param storeState The state of the store
 	 * @param state      The state of the simulation
 	 * @param eventQueue The eventqueue
 	 * @param time       This events execution time
 	 * @param customer   This events customer
 	 */
-	public PickEvent(StoreState storeState,State state, EventQueue eventQueue, double time, Customer customer) {
+	public PickEvent(StoreState storeState, State state, EventQueue eventQueue, double time, Customer customer) {
 		super(state, eventQueue, time);
 		this.state = state;
 		this.eventQueue = eventQueue;
@@ -44,15 +47,17 @@ public class PickEvent extends Event {
 		state.notifyObs();
 		if (storeState.getFreeCheckouts() > 0) {
 			storeState.occupyACheckout();
-			eventQueue.push(new PayEvent(storeState,state, eventQueue, time + storeState.getPayTime(), customer));	
-			storeState.increasePayedCustomers();		
+			eventQueue.push(new PayEvent(storeState, state, eventQueue, time + storeState.getPayTime(), customer));
+			storeState.increasePayedCustomers();
 		} else {
 			storeState.customerQueued();
 			customerQueue.push(customer);
 		}
 	}
+
 	/**
 	 * Returns this events time
+	 * 
 	 * @return time
 	 */
 	public double getTime() {
@@ -61,6 +66,7 @@ public class PickEvent extends Event {
 
 	/**
 	 * Returns this events customer
+	 * 
 	 * @return customer
 	 */
 	public Customer getCustomer() {
@@ -69,6 +75,7 @@ public class PickEvent extends Event {
 
 	/**
 	 * Returns this events name
+	 * 
 	 * @return name
 	 */
 	public String getName() {
