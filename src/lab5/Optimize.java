@@ -60,11 +60,13 @@ public class Optimize implements K {
 		while (minCheckouts >= 1) {
 			int currentMissedCustomers = metod1(minCheckouts, maxCustomers, lambda, pickMin, pickMax, payMin, payMax,
 					seed, closingTime);
+			//System.out.println("kassor: " + minCheckouts + "\t\tmissade kunder: " + currentMissedCustomers + "\t\tjämf. " + missedCustomers);
 			if (missedCustomers != currentMissedCustomers) {
 				return minCheckouts + 1;
 			}
 			minCheckouts--;
 		}
+		//System.out.println("==================");
 		return maxCustomers;
 	}
 
@@ -73,7 +75,8 @@ public class Optimize implements K {
 		Random ran = new Random(seed);
 		for (int i = 0; i < 100; i++) {
 			int currentCheckouts = metod2(ran.nextInt());
-			if (minCheckouts != Math.max(minCheckouts, currentCheckouts)) {
+			System.out.println("Nuvarande kassor:" + currentCheckouts + "\t\tMin. kassor: " + minCheckouts);
+			if (minCheckouts == Math.max(minCheckouts, currentCheckouts)) {
 				i = 0;
 			}
 			minCheckouts = Math.max(minCheckouts, currentCheckouts);
@@ -84,6 +87,7 @@ public class Optimize implements K {
 	public static void main(String[] args) {
 		Optimize o = new Optimize();
 		System.out.println("metod 2: " + o.metod2(o.seed));
+		System.out.println("--------------------");
 		System.out.println("metod 3: " + o.metod3(o.seed));
 	}
 }
