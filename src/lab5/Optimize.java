@@ -3,7 +3,11 @@ package lab5;
 import lab5.store.StoreState;
 
 import java.util.Random;
-
+/**
+ * Class to optimize the number of optimal number of checkouts
+ * @author Hampus Kämppi, Gustav Edner, Jonathan Junel, Linus Karlsson
+ *
+ */
 public class Optimize {
 
     /**
