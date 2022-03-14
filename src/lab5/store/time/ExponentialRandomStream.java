@@ -11,7 +11,7 @@ public class ExponentialRandomStream {
 	private double lambda;
 	  /**
 	   * Constructor
-	   * @param lambda 
+	   * @param lambda number of customers per hour
 	   * @param seed, random number generators seed
 	   */
 	public ExponentialRandomStream(double lambda, long seed) {
@@ -20,7 +20,7 @@ public class ExponentialRandomStream {
 	}
 	  /**
 	   * Constructor
-	   * @param lambda
+	   * @param lambda number of customers per hour
 	   */
 	public ExponentialRandomStream(double lambda) {
 		rand = new Random();

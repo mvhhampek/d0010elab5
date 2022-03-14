@@ -30,7 +30,7 @@ public class StoreState extends State {
     private int occupiedCheckouts;
     private int missedCostumers;
     private int maxCheckouts;
-    private int lambda; // customers per timme
+    private int lambda;
     private long seed;
     private int customersQueued;
     private double totalQueueTime;
@@ -56,6 +56,7 @@ public class StoreState extends State {
         arriveTime = new ExponentialRandomStream(lambda, seed);
         pickTime = new UniformRandomStream(minPick, maxPick, seed);
         payTime = new UniformRandomStream(minPay, maxPay, seed);
+        
         this.closingTime = closingTime;
         this.maxCheckouts = maxCheckouts;
         this.maxCustomers = maxCustomers;
@@ -65,13 +66,14 @@ public class StoreState extends State {
         this.maxPick = maxPick;
         this.minPick = minPick;
         this.lambda = lambda;
+        
         missedCostumers = 0;
         totalQueueTime = 0;
         freeCheckoutTime = 0;
         customersQueued = 0;
+        payedCustomers = 0;
         customerFactory = new CustomerFactory();
         customerQueue = new CustomerQueue();
-        payedCustomers = 0;
     }
 
     /**
@@ -192,7 +194,7 @@ public class StoreState extends State {
     }
 
     /**
-     * 
+     * Checks if there is space for more customers in the store
      * @return true if there is place for more customers in the store
      */
     public boolean space() {

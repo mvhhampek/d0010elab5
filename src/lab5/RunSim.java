@@ -15,6 +15,7 @@ import lab5.store.StoreState;
 public class RunSim {
 	/**
 	 * Main
+	 * @param args Runtime arguments
 	 */
     public static void main(String[] args){
         

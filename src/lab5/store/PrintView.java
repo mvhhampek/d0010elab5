@@ -6,12 +6,12 @@ import lab5.general.Event;
 import lab5.general.State;
 import lab5.general.View;
 
-@SuppressWarnings("deprecation")
 /**
  * Specific view of the store
  * @author Hampus Kämppi, Gustav Edner, Jonathan Junel, Linus Karlsson
  *
  */
+@SuppressWarnings("deprecation")
 public class PrintView extends View {
     private StoreState storeState;
 

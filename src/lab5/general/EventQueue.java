@@ -65,6 +65,7 @@ public class EventQueue {
 
     /**
      * Returns size of EventQueue
+     * @return size of EventQueue
      */
     public int size() {
         return queue.length;
